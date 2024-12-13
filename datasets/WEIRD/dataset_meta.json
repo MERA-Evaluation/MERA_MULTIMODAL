@@ -1,0 +1,133 @@
+{
+    "dataset_name": "WEIRD",
+    "license": "cc-by-4.0",
+    "dataset_size": 814,
+    "description": "WEIRD is an extended version of a binary classification subtask of the original English [WHOOPS!](https://whoops-benchmark.github.io/) benchmark. The dataset evaluates the ability to detect violations of commonsense.",
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": [
+        "Weirdness understanding",
+        "Common everyday knowledge",
+        "Physical property understanding",
+        "Object function understanding",
+        "Identity & emotion understanding",
+        "Other inductive reasoning"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [
+        "dall-e-3",
+        "gpt-4o"
+    ],
+    "data_example": {
+        "instruction": "Внимательно изучите предложенное изображение.\n<image>.\n Вопрос: {question}. Странные изображения противоречат здравому смыслу, в то время как нормальные ему соответствуют. В качестве ответа укажите только букву A или B без дополнительных рассуждений.\n\nA. {option_a}\nB. {option_b}\nОтвет:",
+        "inputs": {
+            "image": "samples/image0.jpg",
+            "question": "изображение странное или нормальное?",
+            "option_a": "странное",
+            "option_b": "нормальное"
+        },
+        "outputs": "A",
+        "meta": {
+            "id": 0,
+            "categories": {
+                "commonsense_violation_subgroup": "Object Misplacement",
+                "commonsense_violation_group": "Object Function and Misuse"
+            },
+            "caption": "A plate of spaghetti served on a dinner table with a fork.",
+            "pair_id": "v10_47",
+            "image": {
+                "synt_source": [
+                    "gpt-4o",
+                    "dall-e-3"
+                ],
+                "source": "ai-generated"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "image": {
+                "ru": "Путь к файлу с изображением, к которому относится вопрос.",
+                "en": "Path to the image file related to the question."
+            },
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            },
+            "option_a": {
+                "ru": "Вариант ответа A.",
+                "en": "Answer option A."
+            },
+            "option_b": {
+                "ru": "Вариант ответа B.",
+                "en": "Answer option B."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "categories": {
+                "commonsense_violation_subgroup": {
+                    "ru": "Подгруппа нарушения норм реальности, сгенерированная синтетически",
+                    "en": "The synthetically generated subgroup of commonsense violation"
+                },
+                "commonsense_violation_group": {
+                    "ru": "Общая группа нарушения норм реальности, полученная вручную путем объединением подгрупп",
+                    "en": "Commonsense violation group, obtained manually by combining the subgroups"
+                }
+            },
+            "caption": {
+                "ru": "Текстовое описание, используемое для генерации изображения",
+                "en": "The textual caption used for image generation"
+            },
+            "pair_id": {
+                "ru": "Номер пары изображений",
+                "en": "Image pair number"
+            },
+            "image": {
+                "synt_source": {
+                    "ru": "Модели, используемые для генерации вопроса",
+                    "en": "Models used for this sample generation"
+                },
+                "source": {
+                    "ru": "Источник изображения",
+                    "en": "The source of image"
+                }
+            }
+        }
+    },
+    "prompts": [
+        "Внимательно изучите предложенное изображение.\n<image>.\n Вопрос: {question}. Странные изображения противоречат здравому смыслу, в то время как нормальные ему соответствуют. В качестве ответа укажите только букву A или B без дополнительных рассуждений.\n\nA. {option_a}\nB. {option_b}\nОтвет:",
+        "Вопрос: {question}\n<image>\nСтранные изображения описывают такие ситуации, которые не встречаются в реальности. В качестве ответа укажите только букву A или B без дополнительных рассуждений.\n\nA. {option_a}\nB. {option_b}",
+        "Изучи представленное изображение: <image>\n{question}. Странное изображение демонстрирует события или объекты, которые нельзя увидеть в реальной жизни. Нормальное изображение соответствует реальности. Ответь, используя только букву A или B.\n\nA. {option_a}\nB. {option_b}\nПравильный ответ:",
+        "Рассмотрите изображение и дайте ответ на следующий вопрос.\n<image>.\n Вопрос: {question}. Ответьте только буквой A или B, основываясь на том, насколько изображение соответствует логике повседневной жизни.\n\nA. {option_a}\nB. {option_b}",
+        "Ответьте на вопрос: {question}. Странные изображения кажутся нелогичными и фантастическими, а нормальные — реалистичными.\n<image>\n\nA. {option_a}\nB. {option_b}\n\nВ качестве ответа укажите только букву (A или B).",
+        "Посмотрите на изображение.\n<image>.\n Вопрос: {question}. Если изображение демонстрирует необычные, противоречащие реальности или фантастические объекты и события, оно считается странным. Если сцена соответствует привычной реальности, изображение считается нормальным.\n\nA. {option_a}\nB. {option_b}\nУкажите ваш ответ, выбрав только букву A или B.",
+        "Изучи представленное изображение: <image>.\nВопрос: {question}. Ответьте только А или B.\n\nA. {option_a}\nB. {option_b}\nТвой ответ:",
+        "Посмотри на изображение <image> и ответь на вопрос: {question}.\n\nA. {option_a}\nB. {option_b}\n\nСтранное изображение нарушает законы логики, тогда как нормальное изображение выглядит привычно и реалистично.",
+        "{question}. Странные изображения противоречат реальности. Нормальные изображения соответствуют здравому смыслу. Посмотрите на изображение <image> и выберите ответ.\n\nA. {option_a}\nB. {option_b}",
+        "Используя изображение <image>, ответь на вопрос: {question}. Странными являются те изображения, которые несут информацию, противоречащую нормам реальности. Ответь, используя только букву A или B.\n\nA. {option_a}\nB. {option_b}\nОтвет:"
+    ],
+    "metrics": {
+        "Accuracy": {
+            "ru": "Метрика Accuracy вычисляет долю правильных предсказаний модели среди всех обработанных вопросов.",
+            "en": "Accuracy is the proportion of correct model predictions among the total number of cases processed."
+        }
+    },
+    "human_benchmark": {
+        "Accuracy": 82.22
+    }
+}

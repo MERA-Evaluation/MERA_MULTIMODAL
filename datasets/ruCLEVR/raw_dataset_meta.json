@@ -1,0 +1,70 @@
+{
+    "dataset_name": "ruCLEVR",
+    "license": "[cc-by-4.0](https://choosealicense.com/licenses/cc-by-4.0/)",
+    "dataset_size": "len(DATA)",
+    "description": "RuCLEVR is a Visual Question Answering (VQA) dataset inspired by the [CLEVR](https://cs.stanford.edu/people/jcjohns/clevr/) methodology, adapted for the Russian language. \n\nRuCLEVR consists of automatically generated images of 3D objects, each characterized by attributes such as shape, size, color, and material, arranged within various scenes to form complex visual environments. The dataset includes questions based on these images, organized into specific families such as querying attributes, comparing attributes, existence, counting, and integer comparison. Questions are generated using predefined templates, ensuring consistency and diversity across the dataset. The dataset is split into training, validation, and test sets, with the test set created from entirely new data to prevent biases. Questions are designed to assess the models' ability to perform tasks that require accurate visual reasoning by analyzing the attributes and relationships of objects in each scene. Through this structured design, the dataset provides a controlled environment for evaluating the precise reasoning skills of models when presented with visual data.",
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": ["Common everyday knowledge", "Spatial object relationship", "Object recognition", "Physical property understanding", "Static counting", "Comparative reasoning"],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": ["blender"],
+    "data_example": {
+        "instruction": "Даны вопрос и картинка, необходимая для ответа на вопрос. Посмотри на изображение и дай ответ на вопрос. Ответом является одна цифра или одно слово в начальной форме.\nИзображение:<image>\nВопрос:{question}\nОтвет:",
+        "inputs": {
+            "image": "samples/image0123.png",
+            "question": "Одинаков ли цвет большой металлической сферы и матового блока?"
+        },
+        "outputs": "да",
+        "meta": {
+            "id": 17,
+            "question_type": "binary",
+            "image": {
+                "synt_source": ["blender"],
+                "type": "generated"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {"ru": "default", "en": "default"},
+        "inputs": {
+            "image": {"ru": "default", "en": "default"},
+            "question": {"ru": "default", "en": "default"}
+        },
+        "outputs": {"ru": "default", "en": "default"},
+        "meta": {
+            "id": {"ru": "default", "en": "default"},
+            "question_type": {
+                "ru": "Тип вопроса в зависимости от возможных ответов: бинарный, цвета, количество, материалы, формы, размер.",
+                "en": "Question type according to possible answers: binary, colors, count, materials, shapes, size."
+            },
+            "image": {
+                "synt_source": {"ru": "default", "en": "default"},
+                "type": {"ru": "default", "en": "default"}
+            }
+        }
+    },
+    "prompts": [
+        "Даны вопрос и картинка, необходимая для ответа на вопрос. Посмотри на изображение и дай ответ на вопрос. Ответом является одна цифра или одно слово в начальной форме.\nИзображение:<image>\nВопрос:{question}\nОтвет:",
+        "На основе изображения: <image> ответь на вопрос: \"{question}\" одним словом, записанным в начальной форме, или числом, записанным цифрой.\nОтвет:",
+        "Дана картинка <image>. Внимательно посмотрите на нее. Ответьте на вопрос, который связан с содержанием изображения.\nВопрос: {question}\nОтвет дайте в виде одного слова в начальной форме или цифры. Не давайте никаких пояснений.\nОтвет:",
+        "<image>\nДано изображение и вопрос, который с ним связан:\n{question}\nОтветь на вопрос одним словом в начальной форме или числом, записанным одной цифрой. Не аргументируй, не поясняй, не пиши ничего лишнего. Только ответ.\nОтвет:",
+        "Твоя задача - посмотреть на изображение, определить какие объекты на нем, сколько их, какого они цвета, а также как они расположены друг относительно друга. Далее только ответь на вопрос, не добавляя ничего лишнего. Ответ дай в виде одного слова в начальной форме или цифры.\nИзображение: <image>\nВопрос: {question}\nОтвет:",
+        "Изображение: <image>\nВопрос: {question}\nОтвет (одним словом в начальной форме или цифрой, без пояснений):",
+        "Посмотрите на картинку <image>. На ней геометрические объекты. Вопрос: \"{question}\". Этот вопрос связан напрямую с содержанием изображения. Ответьте на вопрос одним словом, употребив начальную форму этого слова, или цифрой. Не давайте объяснений, пишите только ответ на вопрос. Ответ:",
+        "Изображение:\n<image>\nНа этом изображении показаны различные геометрические объекты со своей формой, цветом и расположение друг относительно друга.\nВопрос: {question}\nЭтот вопрос касается объектов на изображении. Ответь на вопрос одним словом, употребив начальную форму этого слова, или числом, используя цифры для его записи.\nОтвет:",
+        "<image>\n{question}\nОтветь на вопрос максимально коротко: одним слово или числом. Не пиши ничего лишнего. Не давай пояснений, расшифровок. Не строй логических цепочек. Дай только ответ и все. Напиши его в виде одного слова в начальной форме или цифры. Ответ:",
+        "Картинка: <image>\nОтветьте на вопрос про содержание картинки. Этот вопрос будет касаться информации про расположенные на изображении объекты, их характеристики и отношения друг к другу.\nВопрос: {question}\nОтветьте одним словом, употребив начальную форму этого слова, или числом, используя цифры для его записи. Пиши только ответ.\nОтвет:"
+    ],
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 1.0
+    }
+}

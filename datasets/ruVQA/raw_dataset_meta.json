@@ -1,0 +1,74 @@
+{
+    "dataset_name": "ruVQA",
+    "license": "[cc-by-4.0](https://choosealicense.com/licenses/cc-by-4.0/)",
+    "dataset_size": "len(DATA)",
+    "description": "ruVQA is a public question-answering dataset in Russian for two types of images: real photos and abstract illustrations. The questions are divided into 1) simple and 2) complex, categorized by the most frequent types: binary, comparative, how many, where, how, which, what, who.",
+    "modalities": ["image", "text"],
+    "skills": ["Scene understanding", "Physical property understanding", "Object function understanding", "Identity & emotion understanding", "Mathematical reasoning", "Static counting", "Common everyday knowledge", "Spatial object relationship", "Object-object interaction", "Object localization", "Object recognition", "Living things motion", "Object motion", "Human body pose recognition"],
+    "domains": "list(set(sample['meta']['domain'] for sample in DATA))",
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample['meta']['image']['synt_source'] for sample in DATA))",
+    "data_example": { 
+            "instruction": "Внимательно посмотрите на картинку <image>.\nОтветьте кратко на вопрос. В качестве ответа напишите слово в той же форме, как спрашивается в вопросе, без дополнительных рассуждений, либо цифру, если ответом является число.\nВопрос:{question}\nОтвет:",
+            "inputs": {
+                "image": "samples/sample1.jpg",
+                "question": "Какого цвета комбинезон девушки?"
+            },
+            "outputs": "Белого",
+            "meta": {
+                "id": 123,
+                "categories": {
+                    "question_type": "which"
+                },
+                "image": {
+                    "source": "photo"
+                },
+                "complexity": "simple_question"
+            }
+    },
+    "data_field_descriptions": {
+            "instruction": {"ru": "default", "en": "default"},
+            "inputs": {
+                "image": {"ru": "default", "en": "default"},
+                "question": {"ru": "default", "en": "default"}
+            },
+            "outputs": {"ru": "default", "en": "default"},
+            "meta": {
+                "id": {"ru": "default", "en": "default"},
+                "categories": {
+                    "question_type": {
+                        "ru": "типы вопросов: бинарный, сравнительный, сколько, где, как, какой, что, кто",
+                        "en": "question types: compare, how much, what, which, where, who, how, binary"
+                    }
+                },
+                "image": {
+                    "source": {
+                        "ru": "источник изображений: фото из COCO или абстрактная картинка",
+                        "en": "source of the image: photo or abstract"
+                    }
+                },
+                "complexity": {
+                    "ru": "Сложность вопроса: простая или сложная", 
+                    "en": "Complexity of the question: complex / simple"
+                }
+            }
+    },
+    "prompts": [
+        "Посмотри на изображение <image> и ответь на вопрос по этой картинке. Ответ пиши в той же форме, как спрашивается в вопросе, без дополнительных рассуждений, числа пиши не текстом, а цифрой.\n\nВопрос:{question}\nОтвет:",
+        "<image> Посмотрите на предложенное изображение.\nОтветьте на заданный вопрос кратким ответом (числа пиши не текстом, а цифрой), не рассуждая.\n\nВопрос:{question}\n",
+        "Вам дана картинка: <image>.\nОтветьте на вопрос, заданный по этой картинке. Ответ напишите краткий, в той форме, которая задается вопросом, если это число, то напишите его цифрой, а не текстом.\n\nВопрос:{question}\nОтвет:",
+        "Тебе дали следующую картинку <image>.\nОтветь на вопрос по картинке как можно кратко, ничего не дописывая. Приводить ответ к начальной форме не нужно, числа пишем цифрой.\n\nВопрос:{question}\nОтвет:",
+        "Перед Вами картинка или фото: <image> и вопрос. Ответьте на вопрос по изображению.\nВопрос:{question}\nОтвет должен быть написан кратко, в той же форме, которую предполагает вопрос. Если ответом является число, напишите его цифрой.\n\nОтвет:",
+        "Внимательно посмотрите на картинку <image>.\nКратко ответьте на заданный вопрос. В качестве ответа на вопрос напишите слово в той же форме, как спрашивается в вопросе, без дополнительных рассуждений.\n\nВопрос:{question}\n\nОтвет:",
+        "Перед тобой фото, либо изображение <image>.\nК нему дается вопрос. Ответь на этот вопрос кратко, ничего не дописывая кроме самого ответа. Ответ пиши не в начальной форме, а так как спрашивается в вопросе, в случае чисел — ответ пиши цифрой.\n\nВопрос:{question}\nОтвет:",
+        "Вам даны изображение <image> и вопрос к нему.\nОтветьте на вопрос кратко, напишите ответ в той же форме, как задается в вопросе, без дополнительных пояснений (если ответ это число, то напишите его цифрой).\n\nВопрос:{question}\nОтвет:",
+        "Внимательно рассмотри предложенную тебе картинку <image>.\nВопрос:{question}\nПрочитай вопрос и ответь на него кратко, ничего не поясняя. Ответ должен быть записан в форме, предполагаемой вопросом, а не в начальной, а если ответ число — то записан цифрой.\nОтвет:",
+        "Тебе даны изображение <image> и вопрос к этому изображению. Ответь на заданный вопрос кратко, без воды, в той форме, как спрашивается в вопросе, цифрой, если ответ число.\n\nВопрос:{question}\nОтвет:"
+    ],
+    "metrics": {
+        "Exact match": {"ru": "default", "en": "default"}
+    },
+    "human_benchmark": {
+        "Exact match": 1.0
+    }
+}

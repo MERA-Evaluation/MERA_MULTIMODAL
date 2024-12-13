@@ -1,0 +1,482 @@
+{
+    "Perception": {
+        "_desc": "",
+        "_nest": {
+            "Fine-grained cross-instance perception": {
+                "_desc": "",
+                "_nest": {
+                    "Overlapping object differentiation": {
+                        "_desc": "",
+                        "_nest": {
+                            "Overlapping object differentiation": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Overlapping image differentiation": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Speaker diarization": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Mutual object localization": {
+                        "_desc": "",
+                        "_nest": {
+                            "Mutual object localization": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Spatial object relationship": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Temporal object relationship": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Repeating patter recognition": {
+                        "_desc": "",
+                        "_nest": {
+                            "Repeating patter recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Visual pattern recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Temporal pattern recognition": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Event recognition": {
+                        "_desc": "",
+                        "_nest": {
+                            "Event recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Object-object interaction": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Human-object interaction": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Human-human interaction": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Fine-grained single-instance perception": {
+                "_desc": "",
+                "_nest": {
+                    "Object localization": {
+                        "_desc": "",
+                        "_nest": {
+                            "Object localization": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Object localization": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Object recognition": {
+                        "_desc": "",
+                        "_nest": {
+                            "Object recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Object recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Event recognition": {
+                        "_desc": "",
+                        "_nest": {
+                            "Event recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Object motion recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Living things motion recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Pose recognition": {
+                        "_desc": "",
+                        "_nest": {
+                            "Non-human pose recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Animal body pose recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    }
+                                }
+                            },
+                            "Human pose recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Human body pose recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Facial expression recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Hand gesture recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Textual grounding": {
+                "_desc": "",
+                "_nest": {
+                    "Image-to-text grounding": {
+                        "_desc": "",
+                        "_nest": {
+                            "Image-to-text grounding": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Scheme recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Plot recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Table recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Text recognition (OCR)": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Audio-to-text grounding": {
+                        "_desc": "",
+                        "_nest": {
+                            "Prosody & stress recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Prosody & stress recognition": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    }
+                                }
+                            },
+                            "Speech recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Onomatopoeia": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    },
+                                    "Speech recognition": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    },
+                                    "Song lyrics recognition": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    }
+                                }
+                            },
+                            "Media grounding": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Visual media grounding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "V"]
+                                    },
+                                    "Temporal media grounding": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Knowledge": {
+        "_desc": "",
+        "_nest": {
+            "Knowledge": {
+                "_desc": "",
+                "_nest": {
+                    "Knowledge": {
+                        "_desc": "",
+                        "_nest": {
+                            "Common everyday knowledge": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Common everyday knowledge": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            },
+                            "Domain knowledge": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Common domain knowledge": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Expert domain knowledge": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Reasoning": {
+        "_desc": "",
+        "_nest": {
+            "Inductive reasoning": {
+                "_desc": "",
+                "_nest": {
+                    "Attribute recognition": {
+                        "_desc": "",
+                        "_nest": {
+                            "Coarse attribute recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Generated content detection": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Source characterization": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Media characteristic understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Speech emotion recognition": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    },
+                                    "Music emotion recognition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Melodic structure interpretation": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Topic understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Style & genre understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Scene understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            },
+                            "Object attribute recognition": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Physical property understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Object function understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Identity & emotion understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Other inductive reasoning": {
+                        "_desc": "",
+                        "_nest": {
+                            "Other inductive reasoning": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Other inductive reasoning": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Deductive reasoning": {
+                "_desc": "",
+                "_nest": {
+                    "Deductive reasoning": {
+                        "_desc": "",
+                        "_nest": {
+                            "Deductive reasoning": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Weirdness understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Analogical reasoning": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Other deductive reasoning": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Abductive reasoning": {
+                "_desc": "",
+                "_nest": {
+                    "Abductive reasoning": {
+                        "_desc": "",
+                        "_nest": {
+                            "Abductive reasoning": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Hypothetical reasoning": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Cause & effect understanding": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Quantitative reasoning": {
+                "_desc": "",
+                "_nest": {
+                    "Quantitative reasoning": {
+                        "_desc": "",
+                        "_nest": {
+                            "Counting": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Static counting": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Temporal counting": {
+                                        "_desc": "",
+                                        "_mod": ["A", "V"]
+                                    }
+                                }
+                            },
+                            "Mathematical reasoning": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Mathematical reasoning": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Other reasoning": {
+                "_desc": "",
+                "_nest": {
+                    "Other reasoning": {
+                        "_desc": "",
+                        "_nest": {
+                            "Other reasoning": {
+                                "_desc": "",
+                                "_nest": {
+                                    "Critical thinking": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Counterfactual robustness": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Problem decomposition": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    },
+                                    "Comparative reasoning": {
+                                        "_desc": "",
+                                        "_mod": ["I", "A", "V"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
