@@ -134,7 +134,7 @@ CUDA_VISIBLE_DEVICES=0 lm_eval --model vllm-vlm \
 - [Методология кросс-ревью](docs/dataset_review.md)
 - [Формат датасетов MERA](docs/dataset_formatting.md)
 - [Таксономия навыков MLLMs](docs/skills_tax.md)
-- [Добавление новых датасетов на HF](docs/dataset_huggingface.md)
+- [Добавление новых датасетов на HF](docs/dataset_hf.md)
 - [Добавление кодовой базы для новых датасетов](docs/task_codebase.md)
 - [Как запустить оценку модели](docs/model_scoring.md)
 - [Как провести Human Baseline](docs/human_baseline.md)
