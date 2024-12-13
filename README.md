@@ -155,6 +155,5 @@ CUDA_VISIBLE_DEVICES=0 lm_eval --model vllm-vlm \
 ## Структура репозитория
 
 - [`docs`](docs) — инструкции по добавлению новых датасетов в мера, по кодовой базе, человеческой оценке (Human Baseline) и др.
-- [`multimodal_tasks`](benchmark_tasks) — задачи для оценки мультимодальных моделей.
-- [`human_benchmarks`](humanbenchmarks/README.md) — материалы по оценке ответов людей в задачах MERA.
-- [`lm-evaluation-harness`](lm-evaluation-harness) — фреймворк для оценки генеративных моделей, кодовая база для прогонов.
+- [`multimodal_tasks`](multimodal_tasks) — задачи для оценки мультимодальных моделей.
+- [`lm-evaluation-harness`](https://github.com/MERA-Evaluation/lm-evaluation-harness/tree/main) — фреймворк для оценки генеративных моделей, кодовая база для прогонов.
