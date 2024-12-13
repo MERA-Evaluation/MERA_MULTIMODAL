@@ -1,0 +1,50 @@
+task: ruclevr
+task_alias: ruclevr
+
+# path to load dataset like you pass for datasets.load_dataset
+dataset_path: MERA-evaluation/ruCLEVR
+
+# if you have different domains then one yaml is for each domain
+# here you put the name of domain like datasets.load_dataset(dataset_path, DOMAIN_NAME)
+# dataset_name: null
+
+# validation data to pick fewshots
+validation_split: shots
+# test data to pick samples for model assessment
+test_split: test
+
+# type of requests: generate_until | multiple_choice
+output_type: generate_until
+
+# function to use to get the list of images
+doc_to_image: !function utils.doc_to_image
+
+# function to form the prompt for each sample (could be jinja2 template)
+doc_to_text: !function utils.doc_to_text
+
+# how target from validation_split is passed to form fewshot
+doc_to_target: "{{outputs}}"
+
+# you can also define the function that processes the results and computes the metrics
+# process_results: !function utils.process_results
+
+# default generation parameters for this task. May be overridden from terminal
+generation_kwargs:
+  until:
+    - "<|endoftext|>"
+  temperature: 0.0
+  do_sample: false
+  max_gen_toks: 64
+
+# list of metrics to use. Here only one metric - EM
+# metric is computed for EACH SAMPLE. Aggregation is applied to metrics for of each sample
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+
+# any metadata you need. Does not affect how the task is processed
+metadata:
+  version: 1.0
