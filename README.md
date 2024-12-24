@@ -83,7 +83,7 @@ MERA — независимый открытый проект [Альянса в
 
     ```bash
     pip install pillow
-    pip install -e ."[vllm]"
+    pip install -e ".[vllm]"
     ```
 
 
