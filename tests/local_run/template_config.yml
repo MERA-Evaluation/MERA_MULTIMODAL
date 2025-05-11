@@ -1,0 +1,47 @@
+storage_params:
+  prefix: ""
+  result_file_name: "results.csv"
+
+map_params:
+  - map_type: "filter"
+    map_name: "blur"
+    map_modality: "image"
+    num_jobs: 1
+    count_download_file: 1000
+    format: "image"
+
+  - map_type: "filter"
+    map_name: "meta_extractor"
+    map_modality: "image"
+    num_jobs: 1
+    count_download_file: 1000
+    format: "image"
+
+  - map_type: "filter"
+    map_name: "nsfw"
+    map_modality: "image"
+    num_jobs: 1
+    count_download_file: 1000
+    format: "image"
+
+  - map_type: "filter"
+    map_name: "watermark"
+    map_modality: "image"
+    num_jobs: 1
+    count_download_file: 1000
+    format: "image"
+
+type_get_keys:
+  type_pagination: "local_prefix"
+checkout_params:
+  checkouts:
+    - blur
+    - phash
+    - image_resolution
+    - image_format
+    - corrupted_image
+    - nsfw
+    - watermark
+
+  checkout_result_file: "checkouts_result.csv"
+  failed_samples_folder: "checkout_data"

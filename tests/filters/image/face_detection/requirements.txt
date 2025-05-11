@@ -1,0 +1,19 @@
+boto3==1.35.16
+botocore==1.35.16
+numpy==1.26.4
+
+# filter req
+onnx==1.16.2
+# onnxruntime-gpu==1.18
+onnxruntime==1.18  # for local usage
+opencv-python-headless==4.8.1.78
+# base req
+pandas==2.2.2
+pillow==10.4.0
+pillow_heif==0.18.0
+PyYAML==6.0.2
+redis==5.1.1
+
+# utils req
+requests==2.32.3
+scenedetect==0.6.4

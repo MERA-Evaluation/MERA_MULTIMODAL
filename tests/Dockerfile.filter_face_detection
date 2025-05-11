@@ -1,0 +1,32 @@
+FROM python:3.12 as builder
+
+WORKDIR /code
+
+COPY /filters/image/face_detection/requirements.txt /code/requirements.txt
+
+RUN pip install --upgrade pip && \
+    pip install --prefix=/install --no-cache-dir --upgrade -r requirements.txt
+
+#--mount=type=cache,target=/root/.cache
+FROM python:3.12
+
+RUN mkdir -p /code/utils
+
+COPY --from=builder /install /usr/local
+
+RUN pip uninstall -y torch torchvision torchaudio && \
+    pip install --no-cache-dir --prefix=/usr/local torch==2.2.2+cu118 torchvision==0.17.2+cu118 torchaudio==2.2.2+cu118 --index-url https://download.pytorch.org/whl/cu118 && \
+    pip uninstall -y numpy && \
+    pip install --no-cache-dir numpy==1.26.4
+
+COPY ./base /code/base
+COPY ./filters/base /code/filters/base
+COPY ./filters/checkouts /code/filters/checkouts
+COPY ./filters/collectors /code/filters/collectors
+COPY ./filters/image/face_detection /code/filters/image/face_detection
+COPY ./utils /code/utils
+COPY ./logging_configuration /code/logging_configuration
+
+WORKDIR /code/filters/image/face_detection
+
+CMD ["python", "run.py"]
