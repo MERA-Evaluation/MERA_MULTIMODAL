@@ -1,3 +1,7 @@
+## Attention!
+
+Dataset submissions for the upcoming version of the MERA Multi benchmark close on September 1, 2025. We will continue to welcome contributions after that date for subsequent versions; these will not be included in the upcoming release or its accompanying paper.
+
 ## Распределение баллов за вклад в MERA
 
 Баллы за вклад в проект MERA выдаются:
