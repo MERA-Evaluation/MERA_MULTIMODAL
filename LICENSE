@@ -1,21 +1,37 @@
-MIT License
+License agreement for MERA Multi
 
-Copyright (c) 2024 MERA Evaluation
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+This License Agreement ("License") governs the use of certain intellectual property incorporated into the private test datasets of the MERA Multi benchmark ("Private Tests"). By accessing or using any Private Test, you ("User" or "Contributor") hereby unconditionally accept and agree to comply with all the terms and conditions set forth herein.
+1.	Scope
+This License applies exclusively to the Private Tests of the MERA Multi benchmark.
+All other parts of the MERA benchmark (including public datasets and code) remain subject to the licenses specified by their respective contributors 
+2.	Definitions
+(1)	"Private Tests" means those dataset files or records that form part of the MERA Multi benchmark test-suite and that: (a) have been designated for restricted distribution, (b) are excluded from the benchmark’s publicly available portions, and (c) are made available to Users only pursuant to the terms of this License.
+(2)	“Licensed Materials” means the Private Tests licensed to the User and Contributor under this License.
+(3)	“User” means any individual or legal entity that obtains access to, or otherwise uses, the Licensed Materials under this License. A User is granted rights solely for inference-based evaluation of Models and is bound by all restrictions set forth herein.
+(4)	“Contributor” means the person or legal entity that provided or contributed a dataset (or any part thereof) to the MERA Multi benchmark.
+(5)	"Model" means any software, system, or component that implements algorithms, architectures, or parameters intended to perform tasks using machine-learning or artificial-intelligence techniques.
+(6)	"Inference" means the process of evaluating a Model by applying it to the Licensed Materials to observe the Model’s outputs or performance, without modifying the Model’s parameters.
+(7)	"Training" means using the Licensed Materials, in whole or in part, to adjust, optimize, fine-tune, or otherwise modify a Model.
+3.	Grant of License
+Subject to compliance with all terms and conditions of this License, each User and Contributor is granted a limited, non-exclusive, royalty-free, non-transferable license to use the Licensed Materials solely for the purpose of inference-based evaluation of Models. The User and Contributor may make and retain copies of the Licensed Materials only to the extent reasonably necessary to perform such evaluation, and must safeguard those copies in accordance with this License.
+4.	Restrictions on Users
+The User shall not, and shall not permit any third party to, directly or indirectly:
+(1)	use the Licensed Materials, in whole or in part, to train, fine-tune, or otherwise improve any Model;
+(2)	redistribute, publish, sublicense, transfer or otherwise disclose the Licensed Materials or any non-aggregated portion thereof;
+(3)	remove, alter, disable, or circumvent any watermark, metadata, access control, technical protection measure, or other notice affixed to or embedded in the Licensed Materials;
+(4)	use the Licensed Materials for any purpose not expressly permitted by this License.
+The User may publish or otherwise disclose aggregate evaluation results provided that such publications do not reveal, reproduce, or otherwise disclose the Licensed Materials, individual test items, or any portion thereof that would enable reconstruction, extraction, or re-creation of the Licensed Materials.
+5.	Restrictions on Contributors
+Each Contributor shall not disclose, transfer, publish, or otherwise make available answers of the Private Tests to any third party, except as expressly authorized under this License.
+(1)	A Contributor may conduct subsequent research using its own original data, provided that: 
+a)	such research does not involve the republication, redistribution, or transfer of any Private Tests or derivative materials based thereon;
+b)	the Contributor ensures that no part of the Private Tests is disclosed or used in a manner not permitted by this License.
+(2)	Contributors must implement reasonable measures to prevent unauthorized access to the Private Tests within their control.
+6.	Enforcement and Takedown
+Contributors and licensor retain the right to seek removal or disabling of any unauthorized copy or distribution of the Licensed Materials, including by issuing legally valid notices to hosting providers or other intermediaries in accordance with applicable law.
+Users must cooperate in good faith with any such lawful requests, including prompt deletion of infringing copies and related metadata within their possession or control.
+7.	Termination
+Any breach of this License shall automatically terminate the User’s and Contributor’s rights to use the Licensed Materials. Upon termination, the User and Contributor must immediately cease all use of the Licensed Materials and delete all copies in the User’s / Contributor’s possession or under the User’s / Contributor’s control.
+8.	Retention of Rights
+All rights, titles, and interests in and to the Licensed Materials, including all copyrights and other intellectual property rights, are retained exclusively by the respective licensors.
+Neither this License, nor any part thereof, shall be construed as conveying to the User or the Contributor any ownership rights in or to the Licensed Materials.
