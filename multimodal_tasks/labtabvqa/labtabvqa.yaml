@@ -14,14 +14,6 @@ doc_to_text: !function utils.doc_to_text
 
 doc_to_target: "{{outputs}}"
 
-filter_list:
-  - name: "scoring"
-    filter:
-      - function: "regex"
-        regex_pattern: "(\\b([ABCDEFG])\\b)"
-        group_select: 0
-        fallback: '-1'
-
 metric_list:
   - metric: exact_match
     aggregation: mean

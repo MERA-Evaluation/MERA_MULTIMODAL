@@ -1,10 +1,7 @@
 include: ./custom_loglikelihood_task.yaml
 output_type: generate_until
 doc_to_choice: null
-generation_kwargs:
-  do_sample: false
-  until:
-    - "\n"
+
 process_results: null
 metric_list:
   - metric: exact_match
