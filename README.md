@@ -41,15 +41,38 @@ MERA — независимый открытый проект [Альянса в
 Все задачи хранятся в оригинальном формате MERA (см. [инструкцию по формату](docs/dataset_formatting.md)). Оценка моделей в актуальной кодовой базе поддерживается в режиме zero-shot. Система промптинга и количество shots в текущей реализации не фиксированы и могут быть изменены в дальнейшем. Предложения по улучшению, идеи, дискуссии и обратную связь мы приветствуем в issues текущего репозитория.
 
 
-> ### 🔥 Первые Vision-to-Text тесты 🔥
+> ### 🔥 Image-to-Text тесты 🔥
 > Датасеты, поддерживаемые актуальной кодовой базой:
-> | Name | Task Name | Type | N-shots | Metrics |
-> | --- | --- | --- | --- | ---  |
-> | ruVQA | ruvqa | Public | 0 | EM |
-> | ruCLEVR | ruclevr | Public  | 0 | EM |
-> | WEIRD | weird | Public | 0 | EM |
+> | Name | Task Name | Type | Metrics | Samples |
+> | --- | --- | --- | ---  | ---  |
+> | ruCommonVQA | rucommonvqa | Public | EM | 3015  |
+> | ruCLEVR | ruclevr | Public  | EM |  1148  |
+> | WEIRD | weird | Public | EM |  814 |
+> | ruNaturalScienceVQA | runaturalsciencevqa | Public | EM | 363  |
+> | LabTabVQA | labtabvqa | Private | EM | 339  |
+> | RealVQA | realvqa | Private | EM | 773  |
+> | ruHHH-Image | ruhhh_image | Private | EM |  595 |
+> | ruMathVQA | rumathvqa | Private | EM |  502 |
+> | ruTiE-Image | rutie_vision_gen | Private | EM | 1500   |
+> | SchoolScienceVQA | schoolsciencevqa | Private | EM | 4227  |
+> | UniScienceVQA | unisciencevqa | Private | EM |  7432 |
 >
-> Список датасетов будет пополняться по мере их разработки, в том числе для других модальностей. 
+> ### 🔥 Audio-to-Text тесты 🔥
+> Датасеты, поддерживаемые актуальной кодовой базой:
+> | Name | Task Name | Type | Metrics | Samples |
+> | --- | --- | --- | ---  | ---  |
+> | ruEnvAQA | ruenvaqa | Public | EM | 596  |
+> | RuSLUn | ruslun | Public  | EM |  741 |
+> | AQUARIA | aquaria | Private | EM | 738  |
+> | ruTiE-Audio | rutie_audio_gen | Private | EM | 1500  |
+>
+> ### 🔥 Video-to-Text тесты 🔥
+> Датасеты, поддерживаемые актуальной кодовой базой:
+> | Name | Task Name | Type | Metrics | Samples |
+> | --- | --- | --- | ---  | ---  |
+> | CommonVideoQA | commonvideoqa | Public | EM | 1200  |
+> | RealVideoQA | realvideoqa | Private | EM | 671  |
+> | ruHHH-Video | ruhhh_video | Private | EM | 911  |
 >
 > ### Датасеты доступны в [коллекции на 🤗HF Hub](https://huggingface.co/collections/MERA-evaluation/mera-multimodality-675859d796c41b994ae860b4).
 
@@ -74,41 +97,383 @@ MERA — независимый открытый проект [Альянса в
     ```
 
 2. Установите lm-evaluation-harness. Для этого перейдите в папку с lm-evaluation-harness в репозитории и установите зависимости:
+
     ```bash
     cd MERA_MULTIMODAL/lm-evaluation-harness
     pip install -e .
     ```
 
-    **Note:** Дополнительно может потребоваться остановка pillow или VLLM, если эти библиотеки используются в экспериментах.
+    Устанавливаем обязательные зависимости для аудио датасетов:
 
     ```bash
-    pip install pillow
-    pip install -e ."[vllm]"
+    pip install librosa soundfile
     ```
+
+    Устанавливаем обязательные зависимости для видео датасетов:
+
+    ```bash
+    pip install torchcodec av decord
+    ```
+
+    При наличии необходимости, устанавливаем необязательные зависимости:
+
+    > vLLM
+    ```bash
+    pip install -e ".[vllm]"
+    ```
+
+    > API (для vllm serving и закрытых моделей, допступных по API)
+    ```bash
+    pip install -e ".[api]"
+    ```
+
+    <details>
+    <summary>
+    Наши нововведения и особенности lm-eval...
+    </summary>
+
+    1. Можно регулировать формат подачи объектов через переменные окружения `LOAD_BYTES`, `LOAD_BASE64`, `LOAD_OBJECT` и `LOAD_FILES`. Каждый из них определяет то, в каком виде сэмпл из датасета попадет в харнесс.
+    - LOAD_BYTES=1 - объект представляется в виде байт
+    - LOAD_BASE64=1 - объект представляется в виде словаря с ключом `url` и строкой из base64 символов, лежащей по этому ключу
+    - LOAD_OBJECT=1 - в зависимости от типа модальности возвращается питоновский объект (например, PIL.Image для картинок)
+    - LOAD_FILES=1 - возвращается словарь с ключами `type` и (`audio`, `image` или `video`) в зависимости от модальности. По ключу `audio`, `image` или `video` лежит путь до локального файла с нужным объектом
+    - По умолчанию выбирается режим `LOAD_OBJECT`
+
+    Например, для замеров, которые проводятся через движок `transformers` зачастую нужно подавать объекты в формате `LOAD_OBJECT`. А для замеров с флагом `--pass_multimodal_args_to_chat_history` (как правило для движков `vllm` или API) нужен флаг `LOAD_BASE=64`.
+
+    2. Режим TENSOR PARALLEL запуска для замеров через `transformers`. Для этого необходимо использовать библиотеку `accelerate`. Команда для замера будет выглядеть примерно так:
+
+        ```sh
+        <SOME_ENV_VARIABLES> HARNESS_TENSOR_PARALLEL=1 \ # тут 1 включает режим, а не количество карт
+        accelerate launch --num_processes <YOUR_TP_SIZE> lm-eval
+        --model hf-multimodal \  # обязательно hf модуль
+        --model_args pretrained=<MODEL_NAME>,tp_plan="auto" \ # обязательно добавить tp_plan="auto"
+        <OTHER EVAL ARGUMENTS>
+        ```
+
+    3. Флаг `--pass_multimodal_args_to_chat_history`. Изначально, харнесс собирает отдельно текстовую часть запроса и мультимодальные данные (они кладутся в список). Однако, можно сделать так, чтобы мультимодальные данные передавались прямо в словаре с ролями:
+
+        ```json
+        [
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": "Some text question..."},
+                    {"type": "image", "image": <Image>}
+                ]
+            }
+        ]
+        ```
+
+    3. При вызове `local-chat-completions` или `openai-chat-completions` изображения конвертируются из PIL.Image в base64 байты.
+
+    4. Флаг `--replace_videos_with_images_amount N`. Он позволяет превратить видео в набор кадров. По сути, из видео равномерно сэмплируется N кадров, которые подаются в модель уже в формате картинок, а не одного видео. Обычно используется в связки с `--pass_multimodal_args_to_chat_history`.
+
+    5. Можно делать ресайз картинок, если целиком они не влезают в память. Для этого в `--model_args` нужно после всех параметров через запятую также указать image_width, image_height, image_max_side (скейл картинки, чтобы максимальная сторона не была больше, чем переданное значение пикселей; нельзя совмещать с image_width и image_height).
+    
+    6. При запуске замеров теперь можно использовать кэширование (`--use_cache PATH/TO/CACHE/FILE`). Передается путь до файла, который бьдет создан, а в нем будут хранится кэши всех запросов (запрос + ответ модели на него). Для разных замеров используйте разные пути (сохраняйте кэши в разных файлах). Зачем это нужно? Вы запускаете замер модели Х на датасете Y. Замер упал из-за какой-то проблемы, например, ошибка CUDA. Теперь вам нужно перезапустить замер и заново ждать пока запросы, которые у вас уже единожды прошли, пройдут. Кэширование позволяет этого избежать. Вопросы и ответы сохраняются в файле и при перезапуске замера прогоняться будут только новые запросы, которые раньше прогнаны не были.
+
+    </details>
+
+
+#### Warning!
+
+Ниже приводятся примеры запуска задач с использованием разных модулей. В целом, нет универсального кода для инференса любой мультимодальной LLM, потому возможно ситуация, в которой у вас модель не будет замеряться:
+
+- не те версии библиотек. Условно, старая версия vLLM еще не содержит имплементации модуля для какой-то относительно новой модели
+- странный код инференса модели, например, ей обязательна предварительная обработка медиа-файлов сторонним кодом или требуется сохранять файлы на диск и передавать пути
+- ошибки оборудования. Например, некоторое время LLama-3.2-Vision отказывалась подниматься в vLLM, но была там реализована. Выпадала ошибка ООМ на разных видеокартах
+
+
+<details>
+<summary>
+Для преодоления проблем, связанных непосредственно с кодом для инференса, мы разработали и протестировали шаблон FastAPI сервиса, который позволит вам минимальными усилиями "добавить" поддержку практически любой модели. 
+</summary>
+
+Для запуска некоторых моделей требуется специфичный код, который не описан в общих модулях харнесса. Из-за этого при попытке замерить эти модели через харнесс возникают проблемы. Относительно удобным способом замера таких моделей является поднятие локального vllm-like сервера, у которого есть эндпоинт `v1/chat/completions`. У нас есть готовая обертка, код можно посмотреть [тут](/scripts/fastapi_models/).
+
+Для добавления собственной модели необходимо создать `py` файл с классом, унаследованным от [BaseModel](scripts/fastapi_models/models/base_model.py). Затем реализовать в этом классе два метода `generate` и `init_model`. Например, вот класс для запуска [Qwen2.5-Omni](scripts/fastapi_models/models/qwen_2_5_omni.py).
+
+После добавления нужных моделей необходимо поднять сервер командой
+
+```
+uvicorn main:app --port 1234
+```
+
+Далее можно запускать замер через openai-chat-completions в харнессе, отправляя запросы на http://localhost:1234 (передавать в `base_url`).
+
+</details>
+
+
+<details>
+<summary>
+Датасеты ruTiE-Image и ruTiE-Audio также могут потребовать дополнительных деталей.
+</summary>
+
+`ruTiE` (rutie_audio_gen, rutie_vision_gen) запускаются с `pass_multimodal_args_to_chat_history` флагом. Иначе, возможны ошибки.
+
+В `ruTiE` особая система построения датасета. Датасет строится так, что каждый новый вопрос должен включать в себя содержание предыдущих вопросов, а также ответы модели на них (как диалог в tg - старые сообщения видны в чате - история). Однако на данный момент количество вопросов сильно превышает возможности моделей и ГПУ, потому доступен способ ограничить количество вопросв в этой истории, чтобы модель видела не все предыдущие вопросы наряду с текущим, а только N предыдущих вопросов. Число N передается в `--num_fewshot N`. У всех датасетов кроме `ruTiE` всегда `--num_fewshot 0`. У `ruTiE` этот флаг отвечает за размер истории. Потому, рекомендуется начинать с замера с `--num_fewshot 5`, а дальше при нужде (если замер упал с ООМ) уменьшать число вплоть до 0. Если rutie_audio_gen, rutie_vision_gen с `--num_fewshot 0` все равно падают, допустимо запускать замер на rutie_audio_default, rutie_vision_default с `--num_fewshot 0`.
+
+</details>
 
 
 #### Прогон модели
 
 Команды ниже выполняются из корневой папки репозитория.
 
-Команда для прогона модели (ниже приведен пример для Qwen/Qwen2-VL-2B-Instruct):
+##### Image datasets
+
+> Через transformers:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 lm_eval --model hf-multimodal \
---model_args pretrained=Qwen/Qwen2-VL-2B-Instruct,attn_implementation=flash_attention_2,dtype=bfloat16,convert_img_format=True \
---device cuda --output_path="$PWD/test" --batch_size=1 \
---log_samples --seed 1234 --num_fewshot=0 --apply_chat_template --fewshot_as_multiturn \
---include_path ./multimodal_tasks --tasks ruclevr,ruvqa,weird
+HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model hf-multimodal \
+    --model_args pretrained=Qwen/Qwen2-VL-2B-Instruct,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --include_path ./multimodal_tasks \
+    --tasks weird,labtabvqa
 ```
 
-Прогон модели с VLLM:
+> Через vLLM:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 lm_eval --model vllm-vlm \
---model_args pretrained=Qwen/Qwen2-VL-7B-Instruct,dtype=bfloat16,convert_img_format=True,tensor_parallel_size=1,gpu_memory_utilization=0.5 \
---device cuda --output_path="$PWD/test" --batch_size=1 \
---log_samples --seed 1234 --num_fewshot=0 --apply_chat_template --fewshot_as_multiturn \
---include_path ./multimodal_tasks --tasks ruclevr,ruvqa,weird
+LOAD_BASE64=1 HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model vllm-vlm \
+    --model_args pretrained=Qwen/Qwen2-VL-2B-Instruct,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --pass_multimodal_args_to_chat_history \
+    --include_path ./multimodal_tasks \
+    --tasks ruclevr,rumathvqa
+```
+
+> Через vLLM serve
+
+```bash
+CUDA_VISIBLE_DEVICES=0 vllm serve Qwen/Qwen2-VL-2B-Instruct \
+    --trust-remote-code \
+    --limit-mm-per-prompt '{"image": 20}' \
+    --seed 1234 \
+    --port 1231 \
+    --dtype bfloat16
+```
+
+```bash
+OPENAI_API_KEY="EMPTY" HF_DATASETS_CACHE="ds_cache" LOAD_BASE64=1 HF_TOKEN="YOUR_TOKEN" lm-eval \
+    --model openai-chat-completions \
+    --model_args model=Qwen/Qwen2-VL-2B-Instruct,base_url="http://localhost:1231/v1/chat/completions",num_concurrent=2,max_retries=3,timeout=90000 \
+    --output_path="$PWD/results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --pass_multimodal_args_to_chat_history \
+    --include_path ./multimodal_tasks \
+    --tasks uniscienceqa
+```
+
+##### Video datasets
+
+> Через transformers (могут быть проблемы из-за torch - dtype не сходится):
+
+В данный момент точно корректно работают (тестировались) модели типа `llava-hf/LLaVA-NeXT-Video-7B-hf` (семейство LLaVA-NeXT-Video), `Qwen/Qwen2-VL-2B-Instruct` (семейство Qwen VL).
+
+```bash
+HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model hf_video_llava \
+    --model_args pretrained=llava-hf/LLaVA-NeXT-Video-7B-hf,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --include_path ./multimodal_tasks \
+    --tasks ruhhh_video,commonvideoqa,realvideoqa
+```
+
+> Нарезка видео на фреймы (картинки) и использование картиночных моделек:
+
+Нужно использовать флаги `pass_multimodal_args_to_chat_history` и `replace_videos_with_images_amount`. В `replace_videos_with_images_amount` указывается, сколько кадров равномерно взять из видео.
+
+Предупреждение: конвертация в картинки работает довольно долго!
+
+```bash
+HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model vllm-vlm \
+    --model_args pretrained=Qwen/Qwen2-VL-2B-Instruct,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --pass_multimodal_args_to_chat_history \
+    --replace_videos_with_images_amount 1 \
+    --include_path ./multimodal_tasks \
+    --tasks ruhhh_video,commonvideoqa,realvideoqa
+```
+
+##### Audio datasets
+
+У аудио моделей нет универсального интерфейса, потому разные модули для разных семейств моделей.
+Также обратите внимание, что не все модели могут запускать все датасеты. Например, некоторые модели не могут работать с аудио длиннее X секунд, а в датасетх это условие может нарушаться.
+
+> Qwen/Qwen2-Audio-7B-Instruct
+
+```bash
+HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model hf-audiolm-qwen \
+    --model_args pretrained=Qwen/Qwen2-Audio-7B-Instruct,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --include_path ./multimodal_tasks \
+    --tasks ruenvaqa,aquaria
+```
+
+> Qwen/Qwen-Audio-Chat (на некоторых версиях transformers может не работать, сохраняет аудио локально)
+
+```bash
+pip install matplotlib transformers_stream_generator tensorboard transformers==4.44.2 numpy==1.26
+```
+
+```bash
+HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model hf-audiolm-qwen-audio-chat \
+    --model_args pretrained=Qwen/Qwen-Audio-Chat,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --include_path ./multimodal_tasks \
+    --tasks ruenvaqa
+```
+
+> openbmb/MiniCPM-o-2_6 (не работает на последних версиях transformers)
+
+```bash
+pip install vector_quantize_pytorch vocos transformers==4.44.2 numpy==1.26
+```
+
+```bash
+HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model hf-audiolm-minicpm \
+    --model_args pretrained=openbmb/MiniCPM-o-2_6,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/res" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    -seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --include_path ./multimodal_tasks \
+    --tasks aquaria
+```
+
+> fixie-ai/ultravox-v0_2 (и другие модели ultravox)
+
+```bash
+pip install numpy==1.26
+```
+
+```bash
+HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" CUDA_VISIBLE_DEVICES=0 lm-eval \
+    --model hf-audiolm-ultravox \
+    --model_args pretrained=fixie-ai/ultravox-v0_2,dtype=bfloat16 \
+    --device cuda \
+    --output_path="$PWD/res" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=0 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --include_path ./multimodal_tasks \
+    --tasks aquaria
+```
+
+> Аудио модели можно запускать и через vLLM
+
+```bash
+CUDA_VISIBLE_DEVICES=0 vllm serve fixie-ai/ultravox-v0_5-llama-3_1-8b \
+    --trust-remote-code \
+    --limit-mm-per-prompt '{"audio": 20}' \
+    --seed 1234 \
+    --port 1231 \
+    --dtype bfloat16
+```
+
+```bash
+OPENAI_API_KEY="EMPTY" HF_DATASETS_CACHE="ds_cache" HF_TOKEN="YOUR_TOKEN" lm-eval \
+    --model openai-chat-completions \
+    --model_args model=fixie-ai/ultravox-v0_5-llama-3_1-8b,base_url="http://localhost:1231/v1/chat/completions",num_concurrent=1,max_retries=3,timeout=90000 \
+    --output_path="rutie_audio_results" \
+    --batch_size=1 \
+    --predict_only \
+    --log_samples \
+    --seed 1234 \
+    --num_fewshot=3 \
+    --trust_remote_code \
+    --apply_chat_template \
+    --fewshot_as_multiturn \
+    --pass_multimodal_args_to_chat_history \
+    --include_path ./multimodal-harness/multimodal_tasks \
+    --tasks rutie_audio_gen
+    --limit 10
+```
+
+#### Подготовка архива с логами замера для отправки на сайт
+
+```bash
+python scripts/log_to_submission.py --outputs_dir <output_path из скрипта замера> --dst_dir <где сохранить архив> --model_args <строка из флага model_args из скрипта замера>
 ```
 
 
