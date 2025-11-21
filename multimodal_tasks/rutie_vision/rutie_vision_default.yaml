@@ -2,7 +2,7 @@ task: rutie_vision_default
 task_alias: rutie_vision_default
 
 # path to load dataset like you pass for datasets.load_dataset
-dataset_path: MERA-evaluation/ruTiE_vision
+dataset_path: MERA-evaluation/ruTiE-Image
 
 # if you have different domains then one yaml is for each domain
 # here you put the name of domain like datasets.load_dataset(dataset_path, DOMAIN_NAME)

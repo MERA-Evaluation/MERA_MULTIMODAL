@@ -3,7 +3,7 @@ tag:
   - mera_vision
   - mera_all
 task: rutie_vision
-dataset_path: MERA-evaluation/ruTiE_vision
+dataset_path: MERA-evaluation/ruTiE-Image
 context_based: true
 request_updater: !function utils._update_request
 storage_updater: !function utils._update_storage

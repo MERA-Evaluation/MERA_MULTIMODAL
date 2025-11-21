@@ -3,7 +3,7 @@ tag:
   - mera_audio
   - mera_all
 task: rutie_audio
-dataset_path: MERA-evaluation/ruTiE_audio
+dataset_path: MERA-evaluation/ruTiE-Audio
 context_based: true
 request_updater: !function utils._update_request
 storage_updater: !function utils._update_storage

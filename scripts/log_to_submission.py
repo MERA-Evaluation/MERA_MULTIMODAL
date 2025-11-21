@@ -298,6 +298,10 @@ class ruTiE_Audio(TextTask):
 
 @register_task
 class ruTiE_Vision(TextTask):
+
+    @property
+    def dst_name(self):
+        return "ruTiE_Image"
     
     def doc_to_id(self, doc):
         if "id" in doc["meta"]:

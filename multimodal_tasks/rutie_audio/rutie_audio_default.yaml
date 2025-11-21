@@ -2,7 +2,7 @@ task: rutie_audio_default
 task_alias: rutie_audio_default
 
 # path to load dataset like you pass for datasets.load_dataset
-dataset_path: MERA-evaluation/ruTiE_audio
+dataset_path: MERA-evaluation/ruTiE-Audio
 
 # if you have different domains then one yaml is for each domain
 # here you put the name of domain like datasets.load_dataset(dataset_path, DOMAIN_NAME)
