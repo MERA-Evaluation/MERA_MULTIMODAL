@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: runaturalsciencevqa_earth_science
+task_alias: nsqa_earth_science
+
+dataset_name: earth_science
+
+metadata:
+  version: 1.0

@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: unisciencevqa_applied_sciences
+task_alias: unisciencevqa_applied_sciences
+
+dataset_name: Applied_Sciences
+
+metadata:
+  version: 1.0

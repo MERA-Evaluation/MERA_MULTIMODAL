@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: schoolsciencevqa_history_all
+task_alias: schoolsciencevqa_history_all
+
+dataset_name: history_all
+
+metadata:
+  version: 1.0

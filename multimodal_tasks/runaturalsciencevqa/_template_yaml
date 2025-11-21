@@ -1,14 +1,20 @@
-task: ruvqa
-task_alias: ruvqa
+dataset_path: MERA-evaluation/ruNaturalScienceVQA
 
-dataset_path: MERA-evaluation/ruVQA
 validation_split: shots
 test_split: test
 
 output_type: generate_until
+
 doc_to_image: !function utils.doc_to_image
 doc_to_text: !function utils.doc_to_text
 doc_to_target: "{{outputs}}"
+
+generation_kwargs:
+  until:
+    - "<|endoftext|>"
+  temperature: 0.0
+  do_sample: false
+  max_gen_toks: 64
 
 metric_list:
   - metric: exact_match
@@ -16,6 +22,3 @@ metric_list:
     higher_is_better: true
     ignore_case: true
     ignore_punctuation: true
-
-metadata:
-  version: 1.0

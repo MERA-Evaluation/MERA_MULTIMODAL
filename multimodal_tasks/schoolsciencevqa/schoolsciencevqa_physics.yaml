@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: schoolsciencevqa_physics
+task_alias: schoolsciencevqa_physics
+
+dataset_name: physics
+
+metadata:
+  version: 1.0

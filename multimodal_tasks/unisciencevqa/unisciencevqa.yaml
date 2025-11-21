@@ -1,0 +1,17 @@
+group: unisciencevqa
+group_alias: unisciencevqa
+task:
+  - unisciencevqa_applied_sciences
+  - unisciencevqa_business
+  - unisciencevqa_cultural_studies
+  - unisciencevqa_fundamental_sciences
+  - unisciencevqa_social_sciences
+  - unisciencevqa_health_and_medicine
+
+aggregate_metric_list:
+  - metric: exact_match
+    aggregation: mean
+    weight_by_size: true
+
+metadata:
+  version: 1.0

@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: unisciencevqa_cultural_studies
+task_alias: unisciencevqa_cultural_studies
+
+dataset_name: Cultural_Studies
+
+metadata:
+  version: 1.0

@@ -1,12 +1,12 @@
-task: ruvqa
-task_alias: ruvqa
+task: aquaria
+task_alias: aquaria
 
-dataset_path: MERA-evaluation/ruVQA
+dataset_path: MERA-evaluation/AQUARIA
 validation_split: shots
 test_split: test
 
 output_type: generate_until
-doc_to_image: !function utils.doc_to_image
+doc_to_audio: !function utils.doc_to_audio
 doc_to_text: !function utils.doc_to_text
 doc_to_target: "{{outputs}}"
 

@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: unisciencevqa_health_and_medicine
+task_alias: unisciencevqa_health_and_medicine
+
+dataset_name: Health_and_Medicine
+
+metadata:
+  version: 1.0

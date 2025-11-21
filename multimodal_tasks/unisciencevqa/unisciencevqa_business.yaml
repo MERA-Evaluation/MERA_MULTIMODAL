@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: unisciencevqa_business
+task_alias: unisciencevqa_business
+
+dataset_name: Business
+
+metadata:
+  version: 1.0

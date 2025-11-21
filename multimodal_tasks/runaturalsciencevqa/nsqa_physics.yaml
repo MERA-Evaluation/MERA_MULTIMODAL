@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: runaturalsciencevqa_physics
+task_alias: nsqa_physics
+
+dataset_name: physics
+
+metadata:
+  version: 1.0

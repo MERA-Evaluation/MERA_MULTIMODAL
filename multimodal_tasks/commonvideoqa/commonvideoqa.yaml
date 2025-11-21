@@ -1,0 +1,17 @@
+task: commonvideoqa
+dataset_path: MERA-evaluation/CommonVideoQA
+output_type: generate_until
+training_split: shots
+fewshot_split: shots
+test_split: test
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "outputs"
+doc_to_video: !function utils.doc_to_video
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_punctuation: false
+num_fewshot: null
+metadata:
+  version: 1.0

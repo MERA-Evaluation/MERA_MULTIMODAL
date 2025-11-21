@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: runaturalsciencevqa_chemistry
+task_alias: nsqa_chemistry
+
+dataset_name: chemistry
+
+metadata:
+  version: 1.0

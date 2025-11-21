@@ -1,0 +1,31 @@
+tag:
+  - mera_audio
+  - mera_all
+task: ruslun
+task_alias: ruslun
+dataset_path: MERA-evaluation/ruSLUn
+validation_split: shots
+test_split: test
+
+output_type: generate_until
+doc_to_text: !function utils.doc_to_text
+doc_to_target: "{{outputs}}"
+doc_to_audio: !function utils.doc_to_audio
+process_results: !function utils.process_results
+
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: "lowercase"
+      - function: "ruslunscoring"
+
+metric_list:
+  - metric: intent_EM
+    aggregation: mean
+    higher_is_better: true
+  - metric: slot_f1
+    aggregation: mean
+    higher_is_better: true
+
+metadata:
+  version: 1.0

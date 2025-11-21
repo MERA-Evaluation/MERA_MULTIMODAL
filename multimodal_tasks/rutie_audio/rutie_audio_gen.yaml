@@ -1,0 +1,8 @@
+include: [../custom_generate_task.yaml, rutie_audio.yaml]
+tag:
+  - mera_audio_gen
+  - mera_all
+task: rutie_audio_gen
+dataset_path: MERA-evaluation/ruTiE_audio
+doc_to_text: "{{instruction.replace('{', '{{').replace('}', '}}').replace('{{option_a}}', '{option_a}').replace('{{option_b}}', '{option_b}').replace('{{option_c}}', '{option_c}').replace('{{option_d}}', '{option_d}').format(**inputs).strip()}}"
+doc_to_target: "{{'RUTIE_TARGET_{idx}'.format(idx=meta['question_id'])}}"

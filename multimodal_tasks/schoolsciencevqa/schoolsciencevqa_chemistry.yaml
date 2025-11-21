@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: schoolsciencevqa_chemistry
+task_alias: schoolsciencevqa_chemistry
+
+dataset_name: chemistry
+
+metadata:
+  version: 1.0

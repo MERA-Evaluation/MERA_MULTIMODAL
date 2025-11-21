@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: schoolsciencevqa_biology
+task_alias: schoolsciencevqa_biology
+
+dataset_name: biology
+
+metadata:
+  version: 1.0

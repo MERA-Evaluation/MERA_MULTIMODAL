@@ -1,0 +1,14 @@
+group: runaturalsciencevqa
+group_alias: runaturalsciencevqa
+task:
+  - runaturalsciencevqa_biology
+  - runaturalsciencevqa_chemistry
+  - runaturalsciencevqa_physics
+  - runaturalsciencevqa_earth_science
+aggregate_metric_list:
+  - metric: exact_match
+    aggregation: mean
+    weight_by_size: true
+
+metadata:
+  version: 1.0

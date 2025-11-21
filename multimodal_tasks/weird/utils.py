@@ -1,13 +1,13 @@
-import io
-from typing import Any, Dict, List
+from typing import Any, Dict
 
-from PIL import Image
+import os
+import sys
 
-
-def readbytes(tobytes: bytes) -> Image.Image:
-    stream = io.BytesIO(tobytes)
-    img = Image.open(stream)
-    return img
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+from load_media import get_image
 
 
 def _doc_to_text(doc: Dict[str, Any]) -> str:
@@ -21,9 +21,7 @@ def _doc_to_text(doc: Dict[str, Any]) -> str:
         one string - the prompt to be passed into LM
     """
 
-    # take the instruction and fill it with all doc["inputs"] data
     prompt = doc["instruction"].format(**doc["inputs"])
-
     return prompt
 
 
@@ -46,11 +44,10 @@ def doc_to_text(doc: Dict[str, Any]) -> str:
     """
 
     prompt = _doc_to_text(doc)
-
     return prompt
 
 
-def doc_to_image(doc: Dict[str, Any]) -> List[Image.Image]:
+def doc_to_image(doc: Dict[str, Any]):
     """
     Process images. The result is a sorted in ascending order list of PIL.Image.Image files.
     Sorting here means that if you have more than one image, here you are to decide on the order.
@@ -63,11 +60,5 @@ def doc_to_image(doc: Dict[str, Any]) -> List[Image.Image]:
         list of images in format PIL.Image.Image
     """
 
-    # have only one photo - no need in ensuring the order
-    # take the image and put it into list. Here visuals: List[bytes]
-    visuals = [doc["inputs"]["image"]]
-
-    # convert each image into PIL.Image.Image class from bytes
-    visuals = list(map(lambda x: readbytes(x["bytes"]).convert("RGB"), visuals))
-
-    return visuals
+    images = [doc["inputs"]["image"]]
+    return [get_image(image) for image in images if image is not None]

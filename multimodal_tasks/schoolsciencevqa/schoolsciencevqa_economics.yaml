@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: schoolsciencevqa_economics
+task_alias: schoolsciencevqa_economics
+
+dataset_name: economics
+
+metadata:
+  version: 1.0

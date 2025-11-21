@@ -1,7 +1,7 @@
-task: ruvqa
-task_alias: ruvqa
+task: rucommonvqa
+task_alias: rucommonvqa
 
-dataset_path: MERA-evaluation/ruVQA
+dataset_path: MERA-evaluation/ruCommonVQA
 validation_split: shots
 test_split: test
 

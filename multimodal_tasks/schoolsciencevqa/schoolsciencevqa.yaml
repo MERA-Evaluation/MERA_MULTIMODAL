@@ -1,0 +1,18 @@
+group: schoolsciencevqa
+group_alias: schoolsciencevqa
+task:
+  - schoolsciencevqa_biology
+  - schoolsciencevqa_chemistry
+  - schoolsciencevqa_physics
+  - schoolsciencevqa_earth_science
+  - schoolsciencevqa_history_all
+  - schoolsciencevqa_history_ru
+  - schoolsciencevqa_economics
+
+aggregate_metric_list:
+  - metric: exact_match
+    aggregation: mean
+    weight_by_size: true
+
+metadata:
+  version: 1.0

@@ -1,0 +1,9 @@
+include: _template_yaml
+
+task: unisciencevqa_fundamental_sciences
+task_alias: unisciencevqa_fundamental_sciences
+
+dataset_name: Fundamental_Sciences
+
+metadata:
+  version: 1.0
