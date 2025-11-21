@@ -45,34 +45,34 @@ MERA — независимый открытый проект [Альянса в
 > Датасеты, поддерживаемые актуальной кодовой базой:
 > | Name | Task Name | Type | Metrics | Samples |
 > | --- | --- | --- | ---  | ---  |
-> | ruCommonVQA | rucommonvqa | Public | EM | 3015  |
-> | ruCLEVR | ruclevr | Public  | EM |  1148  |
-> | WEIRD | weird | Public | EM |  814 |
-> | ruNaturalScienceVQA | runaturalsciencevqa | Public | EM | 363  |
-> | LabTabVQA | labtabvqa | Private | EM | 339  |
-> | RealVQA | realvqa | Private | EM | 773  |
-> | ruHHH-Image | ruhhh_image | Private | EM |  595 |
-> | ruMathVQA | rumathvqa | Private | EM |  502 |
-> | ruTiE-Image | rutie_vision_gen | Private | EM | 1500   |
-> | SchoolScienceVQA | schoolsciencevqa | Private | EM | 4227  |
-> | UniScienceVQA | unisciencevqa | Private | EM |  7432 |
+> | ruCommonVQA | rucommonvqa | Public | EM, JS | 3015  |
+> | ruCLEVR | ruclevr | Public  | EM, JS |  1148  |
+> | WEIRD | weird | Public | EM, JS |  814 |
+> | ruNaturalScienceVQA | runaturalsciencevqa | Public | EM, JS | 363  |
+> | LabTabVQA | labtabvqa | Private | EM, JS | 339  |
+> | RealVQA | realvqa | Private | EM, JS | 773  |
+> | ruHHH-Image | ruhhh_image | Private | group_EM, group_JS |  595 |
+> | ruMathVQA | rumathvqa | Private | EM, JS |  502 |
+> | ruTiE-Image | rutie_vision_gen | Private | EM, JS | 1500   |
+> | SchoolScienceVQA | schoolsciencevqa | Private | EM, JS | 4227  |
+> | UniScienceVQA | unisciencevqa | Private | EM, JS |  7432 |
 >
 > ### 🔥 Audio-to-Text тесты 🔥
 > Датасеты, поддерживаемые актуальной кодовой базой:
 > | Name | Task Name | Type | Metrics | Samples |
 > | --- | --- | --- | ---  | ---  |
-> | ruEnvAQA | ruenvaqa | Public | EM | 596  |
-> | RuSLUn | ruslun | Public  | EM |  741 |
-> | AQUARIA | aquaria | Private | EM | 738  |
-> | ruTiE-Audio | rutie_audio_gen | Private | EM | 1500  |
+> | ruEnvAQA | ruenvaqa | Public | EM, JS | 596  |
+> | RuSLUn | ruslun | Public  | EM, F1 |  741 |
+> | AQUARIA | aquaria | Private | EM, JS | 738  |
+> | ruTiE-Audio | rutie_audio_gen | Private | EM, JS | 1500  |
 >
 > ### 🔥 Video-to-Text тесты 🔥
 > Датасеты, поддерживаемые актуальной кодовой базой:
 > | Name | Task Name | Type | Metrics | Samples |
 > | --- | --- | --- | ---  | ---  |
-> | CommonVideoQA | commonvideoqa | Public | EM | 1200  |
-> | RealVideoQA | realvideoqa | Private | EM | 671  |
-> | ruHHH-Video | ruhhh_video | Private | EM | 911  |
+> | CommonVideoQA | commonvideoqa | Public | EM, JS | 1200  |
+> | RealVideoQA | realvideoqa | Private | EM, JS | 671  |
+> | ruHHH-Video | ruhhh_video | Private | group_EM, group_JS | 911  |
 >
 > ### Датасеты доступны в [коллекции на 🤗HF Hub](https://huggingface.co/collections/MERA-evaluation/mera-multimodality-675859d796c41b994ae860b4).
 
