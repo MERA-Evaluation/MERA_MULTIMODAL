@@ -1,0 +1,163 @@
+{
+    "dataset_name": "CommonVideoQA",
+    "description": {
+        "ru": "CommonVideoQA – русскоязычный датасет для оценки видео-текстовых моделей (Video-LLMs) в задаче ответов на вопросы к видео с множественным выбором. Комплексно проверяет следующие навыки: общее понимание видео и его деталей, наличие общих и доменных знаний, способность определять точный порядок действий в видео и восстанавливать полную последовательность, возможность подсчета объектов и действий во времени, а также способность связывать действия с соответствующими временными границами в видео.",
+        "en": "CommonVideoQA is a Russian-language dataset designed for evaluating video-language models (Video-LLMs) on the task of multiple-choice question answering based on video content. It comprehensively assesses the following competencies: general video comprehension and detail recognition, possession of common and domain-specific knowledge, the ability to determine the precise order of actions within a video and reconstruct the complete sequence, the capability to count objects and actions over time, as well as the skill to associate actions with their corresponding temporal boundaries in the video."
+    },
+    "license": "[CC-BY-4.0](https://choosealicense.com/licenses/cc-by-4.0/)",
+    "dataset_size": "len(DATA)",
+    "modalities": [
+        "video",
+        "text"
+    ],
+    "skills": [
+        "Scene understanding",
+        "Object recognition",
+        "Object motion recognition",
+        "Object-object interaction",
+        "Human-object interaction",
+        "Human-human interaction",
+        "Object localization",
+        "Spatial object relationship",
+        "Temporal object relationship",
+        "Physical property understanding",
+        "Object function understanding",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Cause & effect understanding",
+        "Static counting",
+        "Temporal counting",
+        "Mathematical reasoning",
+        "Temporal media grounding"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample['meta']['image']['synt_source'] for sample in DATA))",
+    "data_example": {
+        "instruction": "Вопрос: {question} \nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nДля данных вопроса и вариантов ответа тебе необходимо выбрать верный ответ, отвечай только буквой правильного варианта. Для этого посмотри видео  <video>. Какой твой выбор?",
+        "inputs": {
+            "video": "samples/video632.mp4",
+            "question": "Сколько всего тарелок и тарелочек (не глубоких мисок и не пиал) у героя этого видео?",
+            "option_a": "Пятнадцать.",
+            "option_b": "Тринадцать.",
+            "option_c": "Двенадцать.",
+            "option_d": "Шестнадцать."
+        },
+        "outputs": "A",
+        "meta": {
+            "id": 604,
+            "categories": {
+                "category": "counting"
+            },
+            "video": {
+                "source": [
+                    "captured_on_camera"
+                ],
+                "type": [
+                    "visual"
+                ],
+                "content": [
+                    "object",
+                    "situation",
+                    "inside"
+                ],
+                "context": [
+                    "sound_context",
+                    "with_sound"
+                ],
+                "domain": [
+                    "kitchens"
+                ]
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "video": {
+                "ru": "default",
+                "en": "default"
+            },
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_a": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_b": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_c": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_d": {
+                "ru": "default",
+                "en": "default"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "video": {
+                "source": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "type": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "content": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "context": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "domain": {
+                    "ru": "Видеодомен.",
+                    "en": "Video domain."
+                }
+            },
+            "categories": {
+                "category": {
+                    "ru": "Тип вопроса.",
+                    "en": "Question type."
+                }
+            }
+        }
+    },
+    "task_type": "letter",
+    "task_description": "В этой задаче необходимо выбрать правильный ответ из четырех предложенных вариантов на основе переданных вопроса и видео.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "{{ videopublic_task_context(sample) }}"
+            ]
+        }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9575
+    }
+}

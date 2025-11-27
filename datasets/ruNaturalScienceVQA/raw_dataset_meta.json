@@ -1,0 +1,132 @@
+{
+    "dataset_name": "ruNaturalScienceVQA",
+    "license": "[CC-BY-SA-4.0](https://choosealicense.com/licenses/cc-by-sa-4.0/)",
+    "dataset_size": 363,
+    "description": "Natural Science VQA dataset.",
+    "modalities": [
+        "text",
+        "image"
+    ],
+    "skills": [
+        "Expert domain knowledge",
+        "Scheme recognition",
+        "Text recognition (OCR)",
+        "Static counting",
+        "Problem decomposition",
+        "Mathematical reasoning"
+    ],
+    "domains": [
+        "biology",
+        "chemistry",
+        "earth_science",
+        "physics"
+    ],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Дано: вопрос с несколькими вариантами ответа, изображение и, возможно, пояснение к нему. По имеющейся информации ответь на вопрос. В качестве ответа напиши букву правильного ответа без дополнительных пояснений (A, B, C или D). Изображение:<image>. Пояснение: {context} Вопрос: {question} A. {option_a} B. {option_b} C. {option_c} D. {option_d} Ответ:",
+        "inputs": {
+            "image": "samples/image019.jpeg",
+            "context": "В этом отрывке описана особенность роста у растений розы: Вьющийся рост и плетистый рост — это разные типы роста у розы. Вьющиеся растения имеют длинные, изгибающиеся стебли, похожие на лианы. Такие растения могут расти вверх, покрывая заборы или стены. Розы с плетистым формой роста держатся у земли. Такие растения образуют низкие кусты или кустарники. В группе розовых растений некоторые особи имеют вьющийся рост, а другие — плетистый. В этой группе ген, отвечающий за признак формы роста, имеет два аллеля. Аллель вьющегося роста (G) доминирует над аллелем плетистого роста (g). В этой решётке Пеннета показано скрещивание двух растений розы.",
+            "question": "Каково ожидаемое соотношение потомства с плетистым ростом к потомству с кустовым ростом? Выберите наиболее вероятное соотношение.",
+            "option_a": "4:0",
+            "option_b": "0:4",
+            "option_c": "2:2",
+            "option_d": "3:1"
+        },
+        "outputs": "C",
+        "meta": {
+            "id": 61,
+            "categories": {
+                "domain": "biology",
+                "subdomain": "Genes to traits"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "image": {
+                "ru": "default",
+                "en": "default"
+            },
+            "context": {
+                "ru": "Дополнительная информация, которая вместе с картинкой используется для ответа на вопрос",
+                "en": "A supportive context used along with the image to solve the task"
+            },
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_a": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_b": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_c": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_d": {
+                "ru": "default",
+                "en": "default"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "domain": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "subdomain": {
+                    "ru": "Поддомен, к которому относится пример; в силу дисбаланса не следует использовать данное поле для агрегации, оно представлено чисто в информационных целях",
+                    "en": "A subdomain of the sample; due to the imbalance, this field should not be used for aggregation; it is provided solely for informational purposes"
+                }
+            }
+        }
+    },
+    "task_type": "letter",
+    "task_description": "Задача на знания в сфере естественных наук (физика, биология, химия и естествознание) уровня школьной программы.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Изображение относится к области естественных наук и содержит информацию, которая непосредственно связана с задаваемым вопросом и необходима для выбора правильного ответа на него."
+            ]
+        },
+        "question": {
+        "none": [
+            ""
+        ],
+        "default": [
+            "{{ input_data_media_list(sample) }}{{ question_form(sample) }}{{ nsqa_context_form(sample) }}"
+        ]
+    }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9380
+    },
+    "human_benchmark_expert": {
+        "Exact match": 0.9876
+    }
+}

@@ -1,0 +1,133 @@
+{
+    "dataset_name": "RealVQA",
+    "license": "MERA_private",
+    "dataset_size": 773,
+    "description": "RealVQA is a benchmark for testing the model's ability to conduct visual question-answering(VQA). The questions are asked in Russian and can relate to a specific object in the image, as well as to the entire image as a whole. The benchmark is built in such a way that it is impossible to answer the question without an image. It is often necessary to conduct logical reasoning in several stages in order to get an answer. A key feature of the dataset is the presence of distractors. Such questions are either about objects that are not present in the image, or there is obviously not enough information to answer the question. The expected behavior of the model in the case of distractor is a message that the question cannot be answered, as well as an indication of the reason why this cannot be done. This is how the model's resistance to hallucinations is tested.",
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": [
+        "Spatial object relationship",
+        "Object-object interaction",
+        "Human-object interaction",
+        "Object localization",
+        "Object recognition",
+        "Object motion recognition",
+        "Living things motion recognition",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Style & genre understanding",
+        "Scene understanding",
+        "Physical property understanding",
+        "Object function understanding",
+        "Hypothetical reasoning",
+        "Cause & effect understanding",
+        "Static counting",
+        "Mathematical reasoning",
+        "Counterfactual robustness",
+        "Problem decomposition",
+        "Comparative reasoning"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Внимательно посмотрите на картинку <image>.\nОтветьте на заданный вопрос кратко. В качестве ответа на вопрос напишите слово в той же форме, как спрашивается в вопросе, без дополнительных рассуждений.\n\nВопрос:{question}\n\nОтвет:",
+        "inputs": {
+            "image": "samples/image0165.jpg",
+            "question": "Предположительно в какой день недели сделано это фото?"
+        },
+        "outputs": "в пятницу",
+        "meta": {
+            "id": 165,
+            "categories": {
+                "question_topic": [
+                    "text_understanding"
+                ],
+                "domain": [
+                    "tecnology"
+                ]
+            },
+            "image": {
+                "source": [
+                    "photo"
+                ],
+                "type": [
+                    "photo",
+                    "text",
+                    "inventory_code"
+                ],
+                "content": [
+                    "object"
+                ],
+                "context": [
+                    "no_context"
+                ]
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "image": {
+                "ru": "Путь к файлу с изображением, к которому относится вопрос.",
+                "en": "Path to the image file related to the question."
+            },
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "categories": {
+                "question_topic": {
+                    "ru": "основные темы вопроса (например, text_understanding, logic и т.д.)",
+                    "en": "the main topics of the question (e.g., text_understanding, logic, etc.)"
+                },
+                "domain": {
+                    "ru": "домены изображения (например, plant, music, sport, interior и т.д.)",
+                    "en": "the domain of the image (e.g., plant, music, sport, interior, etc.)"
+                }
+            },
+            "image": {
+                "source": {
+                    "ru": "Информация о происхождении изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Information about the origin of the image — according to the image classification for MERA datasets."
+                },
+                "type": {
+                    "ru": "Тип изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image type — according to the image classification for MERA datasets."
+                },
+                "content": {
+                    "ru": "Содержание изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image content — according to the image classification for MERA datasets."
+                },
+                "context": {
+                    "ru": "Сопроводительный контекст, присутствующий на изображении, — согласно классификации изображений для датасетов MERA.",
+                    "en": "Accompanying context present in the image — according to the image classification for MERA datasets."
+                }
+            }
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.5834
+    }
+}

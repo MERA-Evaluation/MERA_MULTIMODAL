@@ -1,0 +1,163 @@
+{
+    "dataset_name": "LabTabVQA",
+    "license": "MERA_private",
+    "dataset_size": 339,
+    "description": "LabTabVQA is a Russian VQA dataset with medical table images and seven-option questions for assessing multimodal LLMs’ ability to interpret tabular data from images.",
+    "modalities": [
+        "text",
+        "image"
+    ],
+    "skills": [
+        "Table recognition"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "На основании следующего изображения: <image>, ответьте на вопрос.\\n{question}\\nA. {option_a}\\nB. {option_b}\\nC. {option_c}\\nD. {option_d}\\nE. {option_e}\\nF. {option_f}\\nG. {option_g}\\nОтветьте, указав только соответствующую букву варианта.",
+        "inputs": {
+            "option_a": "2",
+            "option_b": "6",
+            "option_c": "1",
+            "option_d": "4",
+            "option_e": "3",
+            "option_f": "5",
+            "option_g": "0",
+            "image": "samples/image0052.png",
+            "question": "Для скольки показателей нормальные значения указаны в виде числового диапазона?"
+        },
+        "outputs": "B",
+        "meta": {
+            "id": 346,
+            "categories": {
+                "question_type": "Формат и оформление данных - Формат значений",
+                "question_text": "Подсчёт количества",
+                "question_source": "human"
+            },
+            "image": {
+                "synt_source": [],
+                "source": [
+                    "photo"
+                ],
+                "type": [
+                    "systematic"
+                ],
+                "content": [
+                    "info"
+                ],
+                "context": [
+                    "no_context"
+                ]
+            },
+            "rows": 11,
+            "columns": 3
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            },
+            "image": {
+                "ru": "Путь к файлу с изображением, к которому относится вопрос.",
+                "en": "Path to the image file related to the question."
+            },
+            "option_a": {
+                "ru": "Вариант ответа A.",
+                "en": "Answer option A."
+            },
+            "option_b": {
+                "ru": "Вариант ответа B.",
+                "en": "Answer option B."
+            },
+            "option_c": {
+                "ru": "Вариант ответа C.",
+                "en": "Answer option C."
+            },
+            "option_d": {
+                "ru": "Вариант ответа D.",
+                "en": "Answer option D."
+            },
+            "option_e": {
+                "ru": "Вариант ответа E.",
+                "en": "Answer option E."
+            },
+            "option_f": {
+                "ru": "Вариант ответа F.",
+                "en": "Answer option F."
+            },
+            "option_g": {
+                "ru": "Вариант ответа G.",
+                "en": "Answer option G."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "categories": {
+                "question_type": {
+                    "ru": "Категория вопроса.",
+                    "en": "Question category."
+                },
+                "question_text": {
+                    "ru": "Тип задачи по тексту вопроса.",
+                    "en": "Task type by question text."
+                },
+                "question_source": {
+                    "ru": "Источник вопроса: human, если вопрос написан человеком, или generated, если вопрос сгенерирован с помощью модели o4-mini.",
+                    "en": "Question source: human if the question is written by a human, or generated if the question is generated with the o4-mini model."
+                }
+            },
+            "image": {
+                "synt_source": {
+                    "ru": "Источники, с помощью которых сгенерированы или воссозданы данные для формирования вопроса, в том числе названия генеративных моделей.",
+                    "en": "Sources used to generate or recreate data for the question, including names of generative models."
+                },
+                "source": {
+                    "ru": "Информация о происхождении изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Information about the origin of the image — according to the image classification for MERA datasets."
+                },
+                "type": {
+                    "ru": "Тип изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image type — according to the image classification for MERA datasets."
+                },
+                "content": {
+                    "ru": "Содержание изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image content — according to the image classification for MERA datasets."
+                },
+                "context": {
+                    "ru": "Сопроводительный контекст, присутствующий на изображении, — согласно классификации изображений для датасетов MERA.",
+                    "en": "Accompanying context present in the image — according to the image classification for MERA datasets."
+                }
+            },
+            "rows": {
+                "ru": "Количество строк в таблице на изображении.",
+                "en": "The number of rows in the table on the image."
+            },
+            "columns": {
+                "ru": "Количество столбцов в таблице на изображении.",
+                "en": "The number of columns in the table on the image."
+            }
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9086
+    }
+}

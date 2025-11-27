@@ -1,6 +1,6 @@
 {
     "dataset_name": "WEIRD",
-    "license": "cc-by-4.0",
+    "license": "[CC-BY-4.0](https://choosealicense.com/licenses/cc-by-4.0/)",
     "dataset_size": 814,
     "description": "WEIRD is an extended version of a binary classification subtask of the original English [WHOOPS!](https://whoops-benchmark.github.io/) benchmark. The dataset evaluates the ability to detect violations of commonsense.",
     "modalities": [
@@ -12,8 +12,7 @@
         "Common everyday knowledge",
         "Physical property understanding",
         "Object function understanding",
-        "Identity & emotion understanding",
-        "Other inductive reasoning"
+        "Identity & emotion understanding"
     ],
     "domains": [],
     "universal_domains": [],
@@ -24,20 +23,19 @@
     "data_example": {
         "instruction": "Внимательно изучите предложенное изображение.\n<image>.\n Вопрос: {question}. Странные изображения противоречат здравому смыслу, в то время как нормальные ему соответствуют. В качестве ответа укажите только букву A или B без дополнительных рассуждений.\n\nA. {option_a}\nB. {option_b}\nОтвет:",
         "inputs": {
-            "image": "samples/image0.jpg",
+            "image": "samples/image001.jpg",
             "question": "изображение странное или нормальное?",
-            "option_a": "странное",
-            "option_b": "нормальное"
+            "option_a": "нормальное",
+            "option_b": "странное"
         },
-        "outputs": "A",
+        "outputs": "B",
         "meta": {
             "id": 0,
             "categories": {
-                "commonsense_violation_subgroup": "Object Misplacement",
-                "commonsense_violation_group": "Object Function and Misuse"
+                "commonsense_violation_subgroup": "Unusual dish",
+                "commonsense_violation_group": "Food and Nutrition Mismatches"
             },
-            "caption": "A plate of spaghetti served on a dinner table with a fork.",
-            "pair_id": "v10_47",
+            "pair_id": "v5_7",
             "image": {
                 "synt_source": [
                     "gpt-4o",
@@ -89,10 +87,6 @@
                     "en": "Commonsense violation group, obtained manually by combining the subgroups"
                 }
             },
-            "caption": {
-                "ru": "Текстовое описание, используемое для генерации изображения",
-                "en": "The textual caption used for image generation"
-            },
             "pair_id": {
                 "ru": "Номер пары изображений",
                 "en": "Image pair number"
@@ -109,25 +103,13 @@
             }
         }
     },
-    "prompts": [
-        "Внимательно изучите предложенное изображение.\n<image>.\n Вопрос: {question}. Странные изображения противоречат здравому смыслу, в то время как нормальные ему соответствуют. В качестве ответа укажите только букву A или B без дополнительных рассуждений.\n\nA. {option_a}\nB. {option_b}\nОтвет:",
-        "Вопрос: {question}\n<image>\nСтранные изображения описывают такие ситуации, которые не встречаются в реальности. В качестве ответа укажите только букву A или B без дополнительных рассуждений.\n\nA. {option_a}\nB. {option_b}",
-        "Изучи представленное изображение: <image>\n{question}. Странное изображение демонстрирует события или объекты, которые нельзя увидеть в реальной жизни. Нормальное изображение соответствует реальности. Ответь, используя только букву A или B.\n\nA. {option_a}\nB. {option_b}\nПравильный ответ:",
-        "Рассмотрите изображение и дайте ответ на следующий вопрос.\n<image>.\n Вопрос: {question}. Ответьте только буквой A или B, основываясь на том, насколько изображение соответствует логике повседневной жизни.\n\nA. {option_a}\nB. {option_b}",
-        "Ответьте на вопрос: {question}. Странные изображения кажутся нелогичными и фантастическими, а нормальные — реалистичными.\n<image>\n\nA. {option_a}\nB. {option_b}\n\nВ качестве ответа укажите только букву (A или B).",
-        "Посмотрите на изображение.\n<image>.\n Вопрос: {question}. Если изображение демонстрирует необычные, противоречащие реальности или фантастические объекты и события, оно считается странным. Если сцена соответствует привычной реальности, изображение считается нормальным.\n\nA. {option_a}\nB. {option_b}\nУкажите ваш ответ, выбрав только букву A или B.",
-        "Изучи представленное изображение: <image>.\nВопрос: {question}. Ответьте только А или B.\n\nA. {option_a}\nB. {option_b}\nТвой ответ:",
-        "Посмотри на изображение <image> и ответь на вопрос: {question}.\n\nA. {option_a}\nB. {option_b}\n\nСтранное изображение нарушает законы логики, тогда как нормальное изображение выглядит привычно и реалистично.",
-        "{question}. Странные изображения противоречат реальности. Нормальные изображения соответствуют здравому смыслу. Посмотрите на изображение <image> и выберите ответ.\n\nA. {option_a}\nB. {option_b}",
-        "Используя изображение <image>, ответь на вопрос: {question}. Странными являются те изображения, которые несут информацию, противоречащую нормам реальности. Ответь, используя только букву A или B.\n\nA. {option_a}\nB. {option_b}\nОтвет:"
-    ],
     "metrics": {
-        "Accuracy": {
-            "ru": "Метрика Accuracy вычисляет долю правильных предсказаний модели среди всех обработанных вопросов.",
-            "en": "Accuracy is the proportion of correct model predictions among the total number of cases processed."
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
         }
     },
     "human_benchmark": {
-        "Accuracy": 82.22
+        "Exact match": 0.8464
     }
 }

@@ -1,0 +1,152 @@
+{
+    "dataset_name": "RealVideoQA",
+    "license": "MERA_private",
+    "dataset_size": 671,
+    "description": {
+        "ru": "RealVideoQA – русскоязычный датасет для оценки видео-текстовых моделей (Video-LLMs) в задаче ответов на вопросы к видео с множественным выбором. Комплексно проверяет следующие навыки: общее понимание видео и его деталей, наличие общих и доменных знаний, способность определять точный порядок действий в видео и восстанавливать полную последовательность, возможность подсчета объектов и действий во времени, а также способность связывать действия с соответствующими временными границами в видео.",
+        "en": "RealVideoQA is a Russian-language dataset designed for evaluating video-language models (Video-LLMs) on the task of multiple-choice question answering based on video content. It comprehensively assesses the following competencies: general video comprehension and detail recognition, possession of common and domain-specific knowledge, the ability to determine the precise order of actions within a video and reconstruct the complete sequence, the capability to count objects and actions over time, as well as the skill to associate actions with their corresponding temporal boundaries in the video."
+    },
+    "modalities": [
+        "video",
+        "text"
+    ],
+    "skills": [
+        "Scene understanding",
+        "Object recognition",
+        "Object motion recognition",
+        "Object-object interaction",
+        "Human-object interaction",
+        "Human-human interaction",
+        "Object localization",
+        "Spatial object relationship",
+        "Temporal object relationship",
+        "Physical property understanding",
+        "Object function understanding",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Cause & effect understanding",
+        "Static counting",
+        "Temporal counting",
+        "Mathematical reasoning",
+        "Temporal media grounding"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "inputs": {
+            "video": "samples/video184.mp4",
+            "question": "Сколько людей на видео прошло вправо?",
+            "option_a": "Один.",
+            "option_b": "Трое.",
+            "option_c": "Двое.",
+            "option_d": "Четверо."
+        },
+        "instruction": "Посмотри <video>. Затем ответь на вопрос \"{question}\", выбрав правильный вариант. Не пиши ничего, кроме буквы.\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}",
+        "outputs": "C",
+        "meta": {
+            "id": 64,
+            "categories": {
+                "category": "counting"
+            },
+            "video": {
+                "source": [
+                    "captured_on_camera"
+                ],
+                "type": [
+                    "visual"
+                ],
+                "content": [
+                    "subject",
+                    "action"
+                ],
+                "context": [
+                    "sound_context",
+                    "with_sound"
+                ],
+                "domain": [
+                    "people"
+                ]
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "inputs": {
+            "option_a": {
+                "en": "Answer option A.",
+                "ru": "Вариант ответа A."
+            },
+            "option_b": {
+                "en": "Answer option B.",
+                "ru": "Вариант ответа B."
+            },
+            "option_c": {
+                "en": "Answer option C.",
+                "ru": "Вариант ответа C."
+            },
+            "option_d": {
+                "en": "Answer option D.",
+                "ru": "Вариант ответа D."
+            },
+            "question": {
+                "en": "Text of the question.",
+                "ru": "Текст вопроса."
+            },
+            "video": {
+                "en": "Path to the video file related to the question.",
+                "ru": "Путь к файлу с видео, к которому относится вопрос."
+            }
+        },
+        "instruction": {
+            "en": "Instruction prompt template with question elements placeholders.",
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса."
+        },
+        "meta": {
+            "categories": {
+                "category": {
+                    "en": "Question type.",
+                    "ru": "Тип вопроса."
+                }
+            },
+            "id": {
+                "en": "Identification number of the question in the dataset.",
+                "ru": "Номер-идентификатор вопроса в датасете."
+            },
+            "video": {
+                "content": {
+                    "en": "Video content — according to the video classification for MERA datasets.",
+                    "ru": "Содержание видео — согласно классификации видео для датасетов MERA."
+                },
+                "context": {
+                    "en": "Accompanying context present in the video — according to the video classification for MERA datasets.",
+                    "ru": "Сопроводительный контекст, присутствующий на видео — согласно классификации видео для датасетов MERA."
+                },
+                "domain": {
+                    "en": "Video domain (animal, architecture, culture and religion, food, interior, nature, people, sport, tecnology, transport, other).",
+                    "ru": "Видеодомен (животные, архитектура, культура и религия, еда, интерьер, природа, люди, спорт, технологии, транспорт, другое)."
+                },
+                "source": {
+                    "en": "Information about the origin of the video — according to the video classification for MERA datasets.",
+                    "ru": "Информация о происхождении видео — согласно классификации видео для датасетов MERA."
+                },
+                "type": {
+                    "en": "Video type — according to the video classification for MERA datasets.",
+                    "ru": "Тип видео — согласно классификации видео для датасетов MERA."
+                }
+            }
+        },
+        "outputs": {
+            "en": "The correct answer to the question.",
+            "ru": "Правильный ответ на вопрос."
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9583
+    }
+}

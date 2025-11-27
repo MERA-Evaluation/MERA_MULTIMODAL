@@ -1,0 +1,174 @@
+{
+    "dataset_name": "RealVideoQA",
+    "description": {
+        "ru": "RealVideoQA – русскоязычный датасет для оценки видео-текстовых моделей (Video-LLMs) в задаче ответов на вопросы к видео с множественным выбором. Комплексно проверяет следующие навыки: общее понимание видео и его деталей, наличие общих и доменных знаний, способность определять точный порядок действий в видео и восстанавливать полную последовательность, возможность подсчета объектов и действий во времени, а также способность связывать действия с соответствующими временными границами в видео.",
+        "en": "RealVideoQA is a Russian-language dataset designed for evaluating video-language models (Video-LLMs) on the task of multiple-choice question answering based on video content. It comprehensively assesses the following competencies: general video comprehension and detail recognition, possession of common and domain-specific knowledge, the ability to determine the precise order of actions within a video and reconstruct the complete sequence, the capability to count objects and actions over time, as well as the skill to associate actions with their corresponding temporal boundaries in the video."
+    },
+    "license": "MERA_private",
+    "dataset_size": "len(DATA)",
+    "modalities": [
+        "video",
+        "text"
+    ],
+    "skills": [
+        "Scene understanding",
+        "Object recognition",
+        "Object motion recognition",
+        "Object-object interaction",
+        "Human-object interaction",
+        "Human-human interaction",
+        "Object localization",
+        "Spatial object relationship",
+        "Temporal object relationship",
+        "Physical property understanding",
+        "Object function understanding",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Cause & effect understanding",
+        "Static counting",
+        "Temporal counting",
+        "Mathematical reasoning",
+        "Temporal media grounding"
+    ],
+    "domains": [
+        "animal",
+        "architecture",
+        "culture_religion",
+        "food",
+        "interior",
+        "nature",
+        "other",
+        "people",
+        "sport",
+        "technology",
+        "transport"
+    ],
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample['meta']['image']['synt_source'] for sample in DATA))",
+    "data_example": {
+        "inputs": {
+            "video": "samples/video184.mp4",
+            "question": "Сколько людей на видео прошло вправо?",
+            "option_a": "Один.",
+            "option_b": "Трое.",
+            "option_c": "Двое.",
+            "option_d": "Четверо."
+        },
+        "instruction": "Посмотри <video>. Затем ответь на вопрос \"{question}\", выбрав правильный вариант. Не пиши ничего, кроме буквы.\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}",
+        "outputs": "C",
+        "meta": {
+            "id": 64,
+            "categories": {
+                "category": "counting"
+            },
+            "video": {
+                "source": [
+                    "captured_on_camera"
+                ],
+                "type": [
+                    "visual"
+                ],
+                "content": [
+                    "subject",
+                    "action"
+                ],
+                "context": [
+                    "sound_context",
+                    "with_sound"
+                ],
+                "domain": [
+                    "people"
+                ]
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "inputs": {
+            "option_a": {
+                "en": "default",
+                "ru": "default"
+            },
+            "option_b": {
+                "en": "default",
+                "ru": "default"
+            },
+            "option_c": {
+                "en": "default",
+                "ru": "default"
+            },
+            "option_d": {
+                "en": "default",
+                "ru": "default"
+            },
+            "question": {
+                "en": "default",
+                "ru": "default"
+            },
+            "video": {
+                "en": "default",
+                "ru": "default"
+            }
+        },
+        "instruction": {
+            "en": "default",
+            "ru": "default"
+        },
+        "meta": {
+            "categories": {
+                "category": {
+                    "en": "Question type.",
+                    "ru": "Тип вопроса."
+                }
+            },
+            "id": {
+                "en": "default",
+                "ru": "default"
+            },
+            "video": {
+                "content": {
+                    "en": "default",
+                    "ru": "default"
+                },
+                "context": {
+                    "en": "default",
+                    "ru": "default"
+                },
+                "domain": {
+                    "en": "Video domain (animal, architecture, culture and religion, food, interior, nature, people, sport, tecnology, transport, other).",
+                    "ru": "Видеодомен (животные, архитектура, культура и религия, еда, интерьер, природа, люди, спорт, технологии, транспорт, другое)."
+                },
+                "source": {
+                    "en": "default",
+                    "ru": "default"
+                },
+                "type": {
+                    "en": "default",
+                    "ru": "default"
+                }
+            }
+        },
+        "outputs": {
+            "en": "default",
+            "ru": "default"
+        }
+    },
+    "task_type": "letter",
+    "task_description": "В этой задаче необходимо выбрать правильный ответ из четырех предложенных вариантов на основе переданных вопроса и видео.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "{{ videopublic_task_context(sample) }}"
+            ]
+        }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9583
+    }
+}

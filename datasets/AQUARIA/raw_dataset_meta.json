@@ -1,0 +1,151 @@
+{
+    "dataset_name": "AQUARIA",
+    "description": {
+        "ru": "Датасет с вопросами на понимание и анализ событий в комплексных аудиосценах, включающих, помимо речи, невербальные звуки и музыку. Оригинальные аудио и вопросы записаны на русском языке с учётом русскоязычной культурной специфики.",
+        "en": "A dataset containing questions for comprehension and analysis of events in complex audio scenes, which include not only speech but also non-verbal sounds and music. The original audio and questions are recorded in Russian, taking into account Russian cultural specifics."
+    },
+    "license": "MERA_private",
+    "dataset_size": "len(DATA)",
+    "modalities": [
+        "text",
+        "audio"
+    ],
+    "skills": [
+        "Speaker diarization",
+        "Temporal object relationship",
+        "Object-object interaction",
+        "Human-object interaction",
+        "Human-human interaction",
+        "Object recognition",
+        "Object motion recognition",
+        "Living things motion recognition",
+        "Speech recognition",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Speech emotion recognition",
+        "Music emotion recognition",
+        "Style & genre understanding",
+        "Scene understanding",
+        "Physical property understanding",
+        "Identity & emotion understanding",
+        "Cause & effect understanding",
+        "Temporal counting",
+        "Comparative reasoning"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": "list(set([sample['meta']['audio']['synt_source'] for sample in DATA]))",
+    "data_example": {
+        "instruction": "Задание содержит две аудиозаписи и вопрос к ним с четырьмя вариантами ответа: A, B, C, D. Из них только один правильный. Прослушайте аудио: <audio_1>, <audio_2>. Прочитайте вопрос к аудиозаписям и напишите букву правильного ответа: {question}\nA) {option_a}\nB) {option_b}\nC) {option_c}\nD) {option_d}\n\nОтвет:",
+        "inputs": {
+            "question": "В чём различие двух предложенных аудиозаписей?",
+            "audio_1": "samples/audio194.wav",
+            "audio_2": "samples/audio195.wav",
+            "option_a": "На первой записи отпирают дверь, на второй она была отперта",
+            "option_b": "На первой записи дверь скрипит, на второй нет",
+            "option_c": "На первой записи в квартиру входит женщина, на второй — мужчина",
+            "option_d": "На первой записи человек заходит в открытую дверь, а на второй отпирает замок"
+        },
+        "outputs": "B",
+        "meta": {
+            "id": 173,
+            "categories": {
+                "task_type": "Audio comparison"
+            },
+            "audio": {
+                "music_genre": "none",
+                "music_vocal": "none",
+                "music_origin": "none"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "audio_1": {
+                "ru": "Путь к файлу с аудио, к которому относится вопрос.",
+                "en": "Path to the audio file related to the question."
+            },
+            "audio_2": {
+                "ru": "Путь ко второму файлу с аудио, к которому относится вопрос (в случае вопроса с двумя аудио файлами, иначе поле не используется).",
+                "en": "Path to the second audio file related to the question (if the question is related to two audio files, else field is not used)."
+            },
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_a": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_b": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_c": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_d": {
+                "ru": "default",
+                "en": "default"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "audio": {
+                "music_genre": {
+                    "ru": "Жанр музыкальной композиции.",
+                    "en": "Genre of the musical composition."
+                },
+                "music_vocal": {
+                    "ru": "Тип вокала, звучащего в музыкальной композиции.",
+                    "en": "Type of vocals in the musical composition."
+                },
+                "music_origin": {
+                    "ru": "Происхождение музыкальной композиции (реальная или сгенерированная).",
+                    "en": "Origin of the musical composition."
+                }
+            },
+            "categories": {
+                "task_type": {
+                    "ru": "Тип задачи (см. раздел Описание задачи).",
+                    "en": "Task type (see section Task description)."
+                }
+            }
+        }
+    },
+    "task_type": "letter",
+    "task_description": "Задача на понимание содержания сложных аудиозаписей, включающих речь, невербальные сигналы и музыку с необходимостью комплексного анализа звуковой картины и отдельных ее компонентов.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Аудиозапись или аудиозаписи содержат информацию, которая необходима для выбора правильного ответа на вопрос задания (без них намеренно решить задание корректно не получится)."
+            ]
+        }
+    },
+    "exclude_fields": {
+        "meta": {
+            "audio": ["music_genre", "music_vocal", "music_origin"]
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9766
+    }
+}

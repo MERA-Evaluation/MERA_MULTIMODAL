@@ -1,0 +1,79 @@
+{
+    "dataset_name": "RuSLUn",
+    "license": "[CC-BY-4.0](https://choosealicense.com/licenses/cc-by-4.0/)",
+    "dataset_size": "len(DATA)",
+    "description": "RuSLUn (Russian Spoken Language UNderstanding dataset) is a Russian-language dataset for spoken language understanding, designed following the principles of the English [SLURP](https://arxiv.org/pdf/2011.13205) and the multilingual [xSID](https://aclanthology.org/2021.naacl-main.197.pdf), but with consideration for the cultural and linguistic specifics of Russia. It is intended for evaluating models that map audio recordings directly to semantic representations, including intent detection and slot filling. RuSLUn contains a variety of spoken commands and queries that are typical for Russian users and contexts. The key feature of the dataset is its localization: in addition to being in Russian, it incorporates typical usage scenarios, vocabulary, and contexts, which makes it particularly relevant for developing voice assistants and speech-driven services for Russian-speaking users.",
+    "modalities": [
+        "audio",
+        "text"
+    ],
+    "skills": ["Speech recognition", "Problem decomposition", "Common everyday knowledge"],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "В датасете к задаче идёт такой промпт:\n\nНе обязательно все слоты присутствуют в запросе.\nАудиофайл: <audio>\nВопрос:\n{question}\n\nПрошу решить задачу на основе вышеизложенного и кратко сформулировать ответ.\n\n{annotation}",
+        "inputs": {
+            "audio": "samples/audio_2.wav",
+            "question": "Внимательно послушай <audio> с запросом пользователя, классифицируй к какому намерению (intent) относится запрос пользователя и выдели соответствующие данному намерению все возможные слоты (slots). Слова в слотах должны быть в той же морфологической форме, что и в аудио, цифры должны быть записаны текстом.",
+            "annotation": "Список доступных намерений с соответствующими слотами в формате намерение: [список слотов].\nBookRestaurant: [cuisine, datetime, facility, location, party_size_description, party_size_number, restaurant_name, restaurant_type, served_dish, sort]\nSearchScreeningEvent: [datetime, location, movie_name, movie_type, object_location_type, object_type]\nSearchCreativeWork: [object_name, object_type]\nAddToPlaylist: [artist, entity_name, music_item, playlist, reference]\nRateBook: [best_rating, object_name, object_part_of_series_type, object_select, object_type, rating_unit, rating_value]\nPlayMusic: [album, artist, datetime, genre, music_item, playlist, service, sort, track]\nweather/find: [condition_description, condition_temperature, datetime, location, weather/attribute]\nalarm/cancel_alarm: [datetime, reference]\nreminder/set_reminder: [datetime, recurring_datetime, reminder/todo]\nreminder/cancel_reminder: [datetime, reference, reminder/todo]\nreminder/show_reminders: [datetime, reference, reminder/todo]\nalarm/set_alarm: [datetime, recurring_datetime, reference, reminder/todo]\nalarm/show_alarms: [datetime, reference]\nalarm/modify_alarm: [datetime]\nalarm/snooze_alarm: [reference]\nalarm/time_left_on_alarm: []\n\nОтвет должен быть в формате валидного json, по схеме: {\"intent\": \"выбранный из списка intent\", \"slots\": [{\"тип слота\": \"значение слота\"}, {\"тип слота\": \"значение слота\"}, {\"тип слота\": \"значение слота\"}]}. Выведи только валидный JSON без форматирования, комментариев и обратных кавычек."
+        },
+        "outputs": {"intent": "RateBook", "slots": [{"object_name": "доктор живаго"}, {"rating_value": "три"}, {"best_rating": "шести"}, {"rating_unit": "звезд"}]},
+        "meta": {
+            "id": 2,
+            "audio": {
+                "type": "real"
+            },
+            "speaker": "7_female_33"
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {"ru": "default", "en": "default"},
+        "inputs": {
+            "audio": {"ru": "default", "en": "default"},
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "annotation": {
+                "ru": "Список доступных намерений и слотов.",
+                "en": "A list of available intents and slots."
+            }
+        },
+        "outputs": {"intent": {"ru": "Намерение пользователя", "en": "User intent"}, "slots": {"ru": "Список слотов в формате json, где ключом является тип слота, а значением — выделенный слот.", "en": "A list of slots in json format, where the key is the slot type and the value is the allocated slot value."}},
+        "meta": {
+            "id": {"ru": "default", "en": "default"},
+            "audio": {
+                "type": {
+                    "en": "Audio type — according to the audio classification for MERA datasets.",
+                    "ru": "Тип аудио — согласно классификации аудио для датасетов MERA."
+                }
+            },
+            "speaker": {"ru": "id_пол_возраст", "en": "id_gender_age"}
+        }
+    },
+    "task_type": "short",
+    "task_description": "Задача на определение намерения (intent) пользователя и соответствующих ему слотов.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Не обязательно все слоты присутствуют в запросе."
+            ]
+        }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Intent Exact Match": {
+            "ru": "Метрика Intent Exact Match вычисляет среднее по оценкам всех примеров: оценка = 1, если предсказанный intent точно совпадает с правильным, и 0 в противном случае.",
+            "en": "The Intent Exact Match metric computes the average of scores over all examples: score = 1 if the predicted intent exactly matches the ground-truth intent, and 0 otherwise."
+        },
+        "Slots F1": {
+            "ru": "Макро-усреднённая F1 по всем примерам для слотов. Для каждого примера вычисляют precision (доля выделенных слотов, оказавшихся верными) и recall (доля правильных слотов, которые были выделены). Слот считается выделенным верно, если совпали его тип и значение; по precision и recall вычисляется F1 для одного примера.",
+            "en": "Macro-averaged F1 across all examples for slots. For each example, precision is the proportion of predicted slots that are correct, and recall is the proportion of true slots that were predicted. A slot is considered correct if both its type and value match; the F1 for an example is computed from its precision and recall."
+        }
+    },
+    "human_benchmark": {
+        "Intent Exact Match": 0.9069,
+        "Slots F1": 0.305
+    }
+}

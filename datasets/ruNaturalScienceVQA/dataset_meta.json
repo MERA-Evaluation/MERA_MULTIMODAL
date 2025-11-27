@@ -1,0 +1,114 @@
+{
+    "dataset_name": "ruNaturalScienceVQA",
+    "license": "[CC-BY-SA-4.0](https://choosealicense.com/licenses/cc-by-sa-4.0/)",
+    "dataset_size": 363,
+    "description": "Natural Science VQA dataset.",
+    "modalities": [
+        "text",
+        "image"
+    ],
+    "skills": [
+        "Expert domain knowledge",
+        "Scheme recognition",
+        "Text recognition (OCR)",
+        "Static counting",
+        "Problem decomposition",
+        "Mathematical reasoning"
+    ],
+    "domains": [
+        "biology",
+        "chemistry",
+        "earth_science",
+        "physics"
+    ],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Дано: вопрос с несколькими вариантами ответа, изображение и, возможно, пояснение к нему. По имеющейся информации ответь на вопрос. В качестве ответа напиши букву правильного ответа без дополнительных пояснений (A, B, C или D). Изображение:<image>. Пояснение: {context} Вопрос: {question} A. {option_a} B. {option_b} C. {option_c} D. {option_d} Ответ:",
+        "inputs": {
+            "image": "samples/image019.jpeg",
+            "context": "В этом отрывке описана особенность роста у растений розы: Вьющийся рост и плетистый рост — это разные типы роста у розы. Вьющиеся растения имеют длинные, изгибающиеся стебли, похожие на лианы. Такие растения могут расти вверх, покрывая заборы или стены. Розы с плетистым формой роста держатся у земли. Такие растения образуют низкие кусты или кустарники. В группе розовых растений некоторые особи имеют вьющийся рост, а другие — плетистый. В этой группе ген, отвечающий за признак формы роста, имеет два аллеля. Аллель вьющегося роста (G) доминирует над аллелем плетистого роста (g). В этой решётке Пеннета показано скрещивание двух растений розы.",
+            "question": "Каково ожидаемое соотношение потомства с плетистым ростом к потомству с кустовым ростом? Выберите наиболее вероятное соотношение.",
+            "option_a": "4:0",
+            "option_b": "0:4",
+            "option_c": "2:2",
+            "option_d": "3:1"
+        },
+        "outputs": "C",
+        "meta": {
+            "id": 61,
+            "categories": {
+                "domain": "biology",
+                "subdomain": "Genes to traits"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "image": {
+                "ru": "Путь к файлу с изображением, к которому относится вопрос.",
+                "en": "Path to the image file related to the question."
+            },
+            "context": {
+                "ru": "Дополнительная информация, которая вместе с картинкой используется для ответа на вопрос",
+                "en": "A supportive context used along with the image to solve the task"
+            },
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            },
+            "option_a": {
+                "ru": "Вариант ответа A.",
+                "en": "Answer option A."
+            },
+            "option_b": {
+                "ru": "Вариант ответа B.",
+                "en": "Answer option B."
+            },
+            "option_c": {
+                "ru": "Вариант ответа C.",
+                "en": "Answer option C."
+            },
+            "option_d": {
+                "ru": "Вариант ответа D.",
+                "en": "Answer option D."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "categories": {
+                "domain": {
+                    "ru": "Категории признаков, характеризующих тестовый пример.",
+                    "en": "Categorial features characterizing the test example."
+                },
+                "subdomain": {
+                    "ru": "Поддомен, к которому относится пример; в силу дисбаланса не следует использовать данное поле для агрегации, оно представлено чисто в информационных целях",
+                    "en": "A subdomain of the sample; due to the imbalance, this field should not be used for aggregation; it is provided solely for informational purposes"
+                }
+            }
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.938
+    },
+    "human_benchmark_expert": {
+        "Exact match": 0.9876
+    }
+}

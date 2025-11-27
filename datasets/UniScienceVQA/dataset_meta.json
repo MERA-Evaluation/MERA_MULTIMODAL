@@ -1,0 +1,114 @@
+{
+    "dataset_name": "UniScienceVQA",
+    "license": "MERA_private",
+    "dataset_size": 7432,
+    "description": "UniScienceVQA is a multimodal dataset designed to assess professional knowledge in fundamental and applied sciences acquired at university or during work experience. One example contains an image and a question with an annotation.",
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": [
+        "Expert domain knowledge",
+        "Scheme recognition",
+        "Text recognition (OCR)",
+        "Static counting",
+        "Problem decomposition",
+        "Comparative reasoning",
+        "Physical property understanding",
+        "Mathematical reasoning"
+    ],
+    "domains": [
+        "Applied_Sciences",
+        "Business",
+        "Cultural_Studies",
+        "Fundamental_Sciences",
+        "Health_and_Medicine",
+        "Social_Sciences"
+    ],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Ознакомьтесь с изображением <image> и дайте ответ на вопрос. {question} {annotation}\nОтвет:",
+        "inputs": {
+            "image": "samples/image01633.jpg",
+            "question": "Какой порядок группы автоморфизмов изображенного графа?",
+            "annotation": "В ответе напишите только число."
+        },
+        "outputs": "72",
+        "meta": {
+            "id": 1633,
+            "categories": {
+                "subdomain": "Computer science and Programming",
+                "type_answer": "short answer"
+            },
+            "image": {
+                "source": "photo",
+                "type": "visual",
+                "content": "riddle"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "image": {
+                "ru": "Путь к файлу с изображением, к которому относится вопрос.",
+                "en": "Path to the image file related to the question."
+            },
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            },
+            "annotation": {
+                "ru": "формат выдаваемого ответа",
+                "en": "the format of the response"
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "categories": {
+                "subdomain": {
+                    "ru": "Поддомен задания.",
+                    "en": "Job subdomain."
+                },
+                "type_answer": {
+                    "ru": "Варинат ответа: короткий ответ или выбор правильного ответа.",
+                    "en": "Answer option: short answer or select the correct answer."
+                }
+            },
+            "image": {
+                "source": {
+                    "ru": "Информация о происхождении изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Information about the origin of the image — according to the image classification for MERA datasets."
+                },
+                "type": {
+                    "ru": "Тип изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image type — according to the image classification for MERA datasets."
+                },
+                "content": {
+                    "ru": "Содержание изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image content — according to the image classification for MERA datasets."
+                }
+            }
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.1259
+    }
+}

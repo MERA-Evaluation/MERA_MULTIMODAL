@@ -1,0 +1,153 @@
+{
+    "dataset_name": "CommonVideoQA",
+    "license": "[CC-BY-4.0](https://choosealicense.com/licenses/cc-by-4.0/)",
+    "dataset_size": 1200,
+    "description": {
+        "ru": "CommonVideoQA – русскоязычный датасет для оценки видео-текстовых моделей (Video-LLMs) в задаче ответов на вопросы к видео с множественным выбором. Комплексно проверяет следующие навыки: общее понимание видео и его деталей, наличие общих и доменных знаний, способность определять точный порядок действий в видео и восстанавливать полную последовательность, возможность подсчета объектов и действий во времени, а также способность связывать действия с соответствующими временными границами в видео.",
+        "en": "CommonVideoQA is a Russian-language dataset designed for evaluating video-language models (Video-LLMs) on the task of multiple-choice question answering based on video content. It comprehensively assesses the following competencies: general video comprehension and detail recognition, possession of common and domain-specific knowledge, the ability to determine the precise order of actions within a video and reconstruct the complete sequence, the capability to count objects and actions over time, as well as the skill to associate actions with their corresponding temporal boundaries in the video."
+    },
+    "modalities": [
+        "video",
+        "text"
+    ],
+    "skills": [
+        "Scene understanding",
+        "Object recognition",
+        "Object motion recognition",
+        "Object-object interaction",
+        "Human-object interaction",
+        "Human-human interaction",
+        "Object localization",
+        "Spatial object relationship",
+        "Temporal object relationship",
+        "Physical property understanding",
+        "Object function understanding",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Cause & effect understanding",
+        "Static counting",
+        "Temporal counting",
+        "Mathematical reasoning",
+        "Temporal media grounding"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Вопрос: {question} \nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nДля данных вопроса и вариантов ответа тебе необходимо выбрать верный ответ, отвечай только буквой правильного варианта. Для этого посмотри видео  <video>. Какой твой выбор?",
+        "inputs": {
+            "video": "samples/video632.mp4",
+            "question": "Сколько всего тарелок и тарелочек (не глубоких мисок и не пиал) у героя этого видео?",
+            "option_a": "Пятнадцать.",
+            "option_b": "Тринадцать.",
+            "option_c": "Двенадцать.",
+            "option_d": "Шестнадцать."
+        },
+        "outputs": "A",
+        "meta": {
+            "id": 604,
+            "categories": {
+                "category": "counting"
+            },
+            "video": {
+                "source": [
+                    "captured_on_camera"
+                ],
+                "type": [
+                    "visual"
+                ],
+                "content": [
+                    "object",
+                    "situation",
+                    "inside"
+                ],
+                "context": [
+                    "sound_context",
+                    "with_sound"
+                ],
+                "domain": [
+                    "kitchens"
+                ]
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "video": {
+                "ru": "Путь к файлу с видео, к которому относится вопрос.",
+                "en": "Path to the video file related to the question."
+            },
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            },
+            "option_a": {
+                "ru": "Вариант ответа A.",
+                "en": "Answer option A."
+            },
+            "option_b": {
+                "ru": "Вариант ответа B.",
+                "en": "Answer option B."
+            },
+            "option_c": {
+                "ru": "Вариант ответа C.",
+                "en": "Answer option C."
+            },
+            "option_d": {
+                "ru": "Вариант ответа D.",
+                "en": "Answer option D."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "video": {
+                "source": {
+                    "ru": "Информация о происхождении видео — согласно классификации видео для датасетов MERA.",
+                    "en": "Information about the origin of the video — according to the video classification for MERA datasets."
+                },
+                "type": {
+                    "ru": "Тип видео — согласно классификации видео для датасетов MERA.",
+                    "en": "Video type — according to the video classification for MERA datasets."
+                },
+                "content": {
+                    "ru": "Содержание видео — согласно классификации видео для датасетов MERA.",
+                    "en": "Video content — according to the video classification for MERA datasets."
+                },
+                "context": {
+                    "ru": "Сопроводительный контекст, присутствующий на видео — согласно классификации видео для датасетов MERA.",
+                    "en": "Accompanying context present in the video — according to the video classification for MERA datasets."
+                },
+                "domain": {
+                    "ru": "Видеодомен.",
+                    "en": "Video domain."
+                }
+            },
+            "categories": {
+                "category": {
+                    "ru": "Тип вопроса.",
+                    "en": "Question type."
+                }
+            }
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9575
+    }
+}

@@ -1,0 +1,135 @@
+{
+    "dataset_name": "ruTiE-Image",
+    "license": "MERA_private",
+    "dataset_size": 1500,
+    "description": {
+        "ru": "Мультимодальная эмуляция теста Тьюринга: три диалога по 500 запросов с текстами и изображениями. Модель выбирает ответы из четырёх вариантов, учитывая контекст предыдущих вопросов.",
+        "en": "A multimodal Turing test emulation with three dialogues, each simulating 500 user requests. The model selects answers from four text options, maintaining coherent dialogue across changing topics."
+    },
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": [
+        "Object recognition",
+        "Object recognition",
+        "Human-human interaction",
+        "Human-object interaction",
+        "Object recognition",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Topic understanding",
+        "Scene understanding",
+        "Analogical reasoning",
+        "Static counting",
+        "Mathematical reasoning"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Вам придётся запоминать контекст\n<context> беседы, которую с вами ведут текстом и картинками. В каждом задании сопоставьте картинку <image>, если она есть, и текст вопроса, если он есть, с контекстом предыдущей беседы - и выберите наиболее верный вариант ответа. Выведите одну букву, которая его обозначает. Вопрос:\n{question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nОтвет:",
+        "inputs": {
+            "image": "samples/image0001.png",
+            "question": "Привет! Я буду звать тебя Ада, а чтобы узнать, как меня зовут, взгляни на картинку и ответь, кто покрасил их в розовый цвет, - а потом возьми три первых буквы этого слова. Так как меня звать?",
+            "option_a": "Худ",
+            "option_b": "Сол",
+            "option_c": "Мал",
+            "option_d": "Зак"
+        },
+        "outputs": "Б",
+        "meta": {
+            "id": 1,
+            "type": "Вводная категория",
+            "unified_category": "trap",
+            "nonunified_category": "Опознание ситуации",
+            "turing_imitation": "algorithmic_transformations",
+            "short_context": 0,
+            "long_context": 0,
+            "image": {
+                "type": "real"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "image": {
+                "ru": "Путь к файлу с изображением, к которому относится вопрос.",
+                "en": "Path to the image file related to the question."
+            },
+            "question": {
+                "ru": "Текст вопроса.",
+                "en": "Text of the question."
+            },
+            "option_a": {
+                "ru": "Вариант ответа A.",
+                "en": "Answer option A."
+            },
+            "option_b": {
+                "ru": "Вариант ответа B.",
+                "en": "Answer option B."
+            },
+            "option_c": {
+                "ru": "Вариант ответа C.",
+                "en": "Answer option C."
+            },
+            "option_d": {
+                "ru": "Вариант ответа D.",
+                "en": "Answer option D."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "type": {
+                "ru": "Тематический домен в датасете.",
+                "en": "Thematic domain of the dataset."
+            },
+            "unified_category": {
+                "ru": "Унифицированная категория по типам мышления.",
+                "en": "Unified category by type of thinking."
+            },
+            "nonunified_category": {
+                "ru": "Неунифицированная категория по типам мышления аудио/визуальной модальности.",
+                "en": "Nonunified categorization by type of thinking audio/visual modality."
+            },
+            "turing_imitation": {
+                "ru": "Категория эмуляции теста Тьюринга, проверяемая вопросом.",
+                "en": "Turing test emulation category tested by the question."
+            },
+            "short_context": {
+                "ru": "Индикатор необходимости последних 1-2 вопросов для ответа.",
+                "en": "Indicator of the need for the last 1-2 questions to answer the current question."
+            },
+            "long_context": {
+                "ru": "Индикатор необходимости последних более чем 1-2 вопросов для ответа.",
+                "en": "Indicator of the need for the last more than 1-2 questions to answer the current question."
+            },
+            "image": {
+                "type": {
+                    "ru": "Тип изображения — согласно классификации изображений для датасетов MERA.",
+                    "en": "Image type — according to the image classification for MERA datasets."
+                }
+            }
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.552
+    }
+}

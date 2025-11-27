@@ -1,0 +1,131 @@
+{
+    "dataset_name": "ruTiE-Audio",
+    "license": "MERA_private",
+    "dataset_size": 1500,
+    "description": {
+        "ru": "Мультимодальная эмуляция теста Тьюринга с аудиовопросами. Три диалога по 500 запросов проверяют способность модели понимать аудио, учитывать контекст и выбирать текстовый ответ из четырёх вариантов.",
+        "en": "Multimodal Turing test emulation with three dialogues of 500 audio-based tasks. The model listens to questions, considers context, and selects one of four text answers per task."
+    },
+    "modalities": [
+        "text",
+        "audio"
+    ],
+    "skills": [
+        "Speech recognition",
+        "Speaker diarization",
+        "Temporal object relationship",
+        "Human-human interaction",
+        "Human-object interaction",
+        "Object recognition",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Topic understanding",
+        "Scene understanding",
+        "Analogical reasoning",
+        "Temporal counting",
+        "Mathematical reasoning"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "С вами ведут диалог посредством аудиофайлов/аудиосообщений. Освежите в памяти контекст предыдущей беседы: <context>. Внимательно прослушайте аудио, если оно есть: <audio>. Прочитайте варианты предлагаемых реакций на прослушанное вами аудио и (или) на контекст предыдущей части диалога, затем выберите наиболее правильный вариант ответной реакции, указав только буквы наиболее правильного варианта без дополнительных пояснений.\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nОтвет:",
+        "inputs": {
+            "audio": "samples/audio0001.wav",
+            "option_a": "Завалинка",
+            "option_b": "Валидол",
+            "option_c": "Валентина",
+            "option_d": "Валентин"
+        },
+        "outputs": "D",
+        "meta": {
+            "id": 1,
+            "type": "Вводная категория",
+            "turing_imitation": "language’n’audio_structure",
+            "unified_category": "trap",
+            "nonunified_category": "Опознание ситуации",
+            "short_context": 0,
+            "long_context": 0,
+            "audio": {
+                "type": "real"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "Промпт-инструкция для модели, содержащая шаблон для вставки элементов вопроса.",
+            "en": "Instruction prompt template with question elements placeholders."
+        },
+        "inputs": {
+            "audio": {
+                "ru": "Путь к файлу с аудио, к которому относится вопрос.",
+                "en": "Path to the audio file related to the question."
+            },
+            "option_a": {
+                "ru": "Вариант ответа A.",
+                "en": "Answer option A."
+            },
+            "option_b": {
+                "ru": "Вариант ответа B.",
+                "en": "Answer option B."
+            },
+            "option_c": {
+                "ru": "Вариант ответа C.",
+                "en": "Answer option C."
+            },
+            "option_d": {
+                "ru": "Вариант ответа D.",
+                "en": "Answer option D."
+            }
+        },
+        "outputs": {
+            "ru": "Правильный ответ на вопрос.",
+            "en": "The correct answer to the question."
+        },
+        "meta": {
+            "id": {
+                "ru": "Номер-идентификатор вопроса в датасете.",
+                "en": "Identification number of the question in the dataset."
+            },
+            "type": {
+                "ru": "Тематический домен в датасете.",
+                "en": "Thematic domain of the dataset."
+            },
+            "unified_category": {
+                "ru": "Унифицированная категория по типам мышления.",
+                "en": "Unified category by type of thinking."
+            },
+            "nonunified_category": {
+                "ru": "Неунифицированная категория по типам мышления аудио/визуальной модальности.",
+                "en": "Nonunified categorization by type of thinking audio/visual modality."
+            },
+            "turing_imitation": {
+                "ru": "Категория эмуляции теста Тьюринга, проверяемая вопросом.",
+                "en": "Turing test emulation category tested by the question."
+            },
+            "short_context": {
+                "ru": "Индикатор необходимости последних 1-2 вопросов для ответа.",
+                "en": "Indicator of the need for the last 1-2 questions to answer the current question."
+            },
+            "long_context": {
+                "ru": "Индикатор необходимости последних более чем 1-2 вопросов для ответа.",
+                "en": "Indicator of the need for the last more than 1-2 questions to answer the current question."
+            },
+            "audio": {
+                "type": {
+                    "en": "Audio type — according to the audio classification for MERA datasets.",
+                    "ru": "Тип аудио — согласно классификации аудио для датасетов MERA."
+                }
+            }
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "Метрика Exact match вычисляет среднее по оценкам всех обработанных вопросов, где оценка имеет значение 1, если предсказанная строка точно совпадает с правильным ответом, и 0 в остальных случаях.",
+            "en": "Exact match is the average of scores for all processed cases, where a given case score is 1 if the predicted string is the exact same as its reference string, and is 0 otherwise."
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.446
+    }
+}

@@ -1,0 +1,156 @@
+{
+    "dataset_name": "UniScienceVQA",
+    "description": "UniScienceVQA is a multimodal dataset designed to assess professional knowledge in fundamental and applied sciences acquired at university or during work experience. One example contains an image and a question with an annotation.",
+    "license": "MERA_private",
+    "dataset_size": "len(DATA)",
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": [
+        "Expert domain knowledge",
+        "Scheme recognition",
+        "Text recognition (OCR)",
+        "Static counting",
+        "Problem decomposition",
+        "Comparative reasoning",
+        "Physical property understanding",
+        "Mathematical reasoning"
+    ],
+    "domains": [
+        "Fundamental sciences",
+        "Social sciences",
+        "Cultural studies",
+        "Health and medicine",
+        "Business",
+        "Applied sciences"
+    ],
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample[\"meta\"][\"domain\"] for sample in DATA))",
+    "data_example": {
+        "instruction": "Ознакомьтесь с изображением <image> и дайте ответ на вопрос. {question} {annotation}\nОтвет:",
+        "inputs": {
+            "image": "samples/image01633.jpg",
+            "question": "Какой порядок группы автоморфизмов изображенного графа?",
+            "annotation": "В ответе напишите только число."
+        },
+        "outputs": "72",
+        "meta": {
+            "id": 1633,
+            "categories": {
+                "subdomain": "Computer science and Programming",
+                "type_answer": "short answer"
+            },
+            "image": {
+                "source": "photo",
+                "type": "visual",
+                "content": "riddle"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "image": {
+                "ru": "default",
+                "en": "default"
+            },
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "annotation": {
+                "ru": "формат выдаваемого ответа",
+                "en": "the format of the response"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "subdomain": {
+                    "ru": "Поддомен задания.",
+                    "en": "Job subdomain."
+                },
+                "type_answer": {
+                    "ru": "Варинат ответа: короткий ответ или выбор правильного ответа.",
+                    "en": "Answer option: short answer or select the correct answer."
+                }
+            },
+            "image": {
+                "source": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "type": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "content": {
+                    "ru": "default",
+                    "en": "default"
+                }
+            }
+        }
+    },
+    "task_type": "short",
+    "task_description": "Задача проверяет знания в сфере фундаментальных, социальных и прикладных наук, культуроведения, бизнеса, здоровья и медицины.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "{{ task_context_rumutau(sample) }}"
+            ]
+        },
+        "answer_format": {
+            "none": [
+                ""
+            ],
+            "formal_request": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_request": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "impersonal_request": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "formal_wish": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_order": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "impersonal_order": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "impersonal_fact": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_manipulation": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_technical": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ]
+        }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.1259
+    }
+}

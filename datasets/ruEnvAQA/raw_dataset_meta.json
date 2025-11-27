@@ -1,0 +1,122 @@
+{
+    "dataset_name": "ruEnvAQA",
+    "license": "[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)",
+    "dataset_size": "len(DATA)",
+    "description": "A dataset of multiple-choice and binary-choice questions in Russian. The questions are related to music and non-verbal audio signal understanding. The dataset is based on questions from English-language datasets [Clotho-AQA](https://arxiv.org/abs/2204.09634) and [MUSIC-AVQA](https://arxiv.org/abs/2203.14072v2).",
+    "modalities": [
+        "text",
+        "audio"
+    ],
+    "skills": [
+        "Scene understanding",
+        "Physical property understanding",
+        "Object function understanding",
+        "Temporal counting",
+        "Comparative reasoning",
+        "Object-object interaction",
+        "Object recognition",
+        "Object motion recognition",
+        "Common everyday knowledge",
+        "Common domain knowledge"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [
+        "Llama-3.2-3B-Instruct"
+    ],
+    "data_example": {
+        "instruction": "Прослушайте аудиозапись.<audio> Прочитайте вопрос к аудио, оцените варианты ответа на вопрос и выберите один правильный. Дайте ответ буквой без дополнительных пояснений.\n\nВопрос: {question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\n\nОтвет:",
+        "inputs": {
+            "question": "В каком месте с наибольшей вероятностью сделана запись?",
+            "audio": "samples/audio024.wav",
+            "option_a": "в аэропорту",
+            "option_b": "на причале",
+            "option_c": "на железнодорожном вокзале",
+            "option_d": "на автобусном вокзале"
+        },
+        "outputs": "C",
+        "meta": {
+            "id": 24,
+            "categories": {
+                "task_type": "Audio scene classification",
+                "source_dataset": "CLOTHO-AQA",
+                "knowledge": "common"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "audio": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_a": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_b": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_c": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_d": {
+                "ru": "default",
+                "en": "default"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "task_type": {
+                    "ru": "Тип задачи в соответствии с классификацией задач в датасете.",
+                    "en": "Task type according to the task classification in the dataset."
+                },
+                "source_dataset": {
+                    "ru": "Датасет, из которого был взят вопрос с аудио.",
+                    "en": "A dataset that the audio and the question originate from."
+                },
+                "knowledge": {
+                    "ru": "Уровень знаний, требуемых для ответа на вопрос.",
+                    "en": "The knowledge level required to answer the question."
+                }
+            }
+        }
+    },
+    "task_type": "letter",
+    "task_description": "Задача на понимание музыки и невербальных аудио сигналов.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Аудиозапись содержит информацию, которая необходима для выбора правильного ответа на вопрос задания (без прослушивания аудио решить задание корректно не получится)."
+            ]
+        }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9497
+    }
+}

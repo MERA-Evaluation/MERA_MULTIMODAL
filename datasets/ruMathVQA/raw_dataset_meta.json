@@ -1,0 +1,148 @@
+{
+    "dataset_name": "ruMathVQA",
+    "description": "ruMathVQA is a multimodal dataset of Russian-language school math problems. One example contains an image and a question with an annotation. The annotation is the text explaining the unambiguous form of the answer.",
+    "license": "MERA_private",
+    "dataset_size": "len(DATA)",
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": [
+        "Common domain knowledge",
+        "Expert domain knowledge",
+        "Scheme recognition",
+        "Text recognition (OCR)",
+        "Mathematical reasoning",
+        "Problem decomposition"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample[\"meta\"][\"domain\"] for sample in DATA))",
+    "data_example": {
+        "instruction": "Найдите ответ на задачу, изображенную на рисунке <image>. {annotation} Ответ:\n",
+        "inputs": {
+            "image": "samples/image001.jpg",
+            "annotation": "Запишите ответ одним целым числом в см$^2$ без указания единиц измерения."
+        },
+        "outputs": "192",
+        "meta": {
+            "id": 1,
+            "categories": {
+                "topic": "mathematics 5th grade"
+            },
+            "image": {
+                "source": "photo",
+                "type": "visual",
+                "content": "riddle"
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "image": {
+                "ru": "default",
+                "en": "default"
+            },
+            "annotation": {
+                "ru": "Требуемый формат ответа.",
+                "en": "The required response format"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "topic": {
+                    "ru": "Предмет и школьный класс задачи [математика | геометрия] n класс",
+                    "en": "The subject and the grade of the task ex. [mathematics | geometry] n grade"
+                }
+            },
+            "image": {
+                "source": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "type": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "content": {
+                    "ru": "default",
+                    "en": "default"
+                }
+            }
+        }
+    },
+    "task_type": "short",
+    "task_description": "Задача на знание и понимание математики школьного уровня.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Изображение содержит все условия математической задачи."
+            ]
+        },
+        "answer_format": {
+            "none": [
+                ""
+            ],
+            "formal_request": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_request": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "impersonal_request": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "formal_wish": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_order": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "impersonal_order": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "impersonal_fact": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_manipulation": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ],
+            "informal_technical": [
+                "{{ mathvqa_annotation_form(sample) }}"
+            ]
+        },
+        "question": {
+            "none": [
+                ""
+            ],
+            "default": [
+                "{{ input_data_media_list(sample) }}{% if sample.inputs.question is defined %}\nВопрос: {{ sample.inputs.question }}{% else %}{% endif %}"
+            ]
+        }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9311
+    },
+    "human_benchmark_expert": {
+        "Exact match": 0.9462
+    }
+}

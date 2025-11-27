@@ -1,0 +1,173 @@
+{
+    "dataset_name": "LabTabVQA",
+    "license": "MERA_private",
+    "dataset_size": "len(DATA)",
+    "description": "LabTabVQA is a Russian VQA dataset with medical table images and seven-option questions for assessing multimodal LLMs’ ability to interpret tabular data from images.",
+    "modalities": [
+        "text",
+        "image"
+    ],
+    "skills": [
+        "Table recognition"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": "list(set(sample['meta']['image']['synt_source'] for sample in DATA))",
+    "data_example": {
+        "instruction": "На основании следующего изображения: <image>, ответьте на вопрос.\\n{question}\\nA. {option_a}\\nB. {option_b}\\nC. {option_c}\\nD. {option_d}\\nE. {option_e}\\nF. {option_f}\\nG. {option_g}\\nОтветьте, указав только соответствующую букву варианта.",
+        "inputs": {
+            "option_a": "2",
+            "option_b": "6",
+            "option_c": "1",
+            "option_d": "4",
+            "option_e": "3",
+            "option_f": "5",
+            "option_g": "0",
+            "image": "samples/image0052.png",
+            "question": "Для скольки показателей нормальные значения указаны в виде числового диапазона?"
+        },
+        "outputs": "B",
+        "meta": {
+            "id": 346,
+            "categories": {
+                "question_type": "Формат и оформление данных - Формат значений",
+                "question_text": "Подсчёт количества",
+                "question_source": "human"
+            },
+            "image": {
+                "synt_source": [],
+                "source": [
+                    "photo"
+                ],
+                "type": [
+                    "systematic"
+                ],
+                "content": [
+                    "info"
+                ],
+                "context": [
+                    "no_context"
+                ]
+            },
+            "rows": 11,
+            "columns": 3
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "image": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_a": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_b": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_c": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_d": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_e": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_f": {
+                "ru": "Вариант ответа F.",
+                "en": "Answer option F."
+            },
+            "option_g": {
+                "ru": "Вариант ответа G.",
+                "en": "Answer option G."
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "question_type": {
+                    "ru": "Категория вопроса.",
+                    "en": "Question category."
+                },
+                "question_text": {
+                    "ru": "Тип задачи по тексту вопроса.",
+                    "en": "Task type by question text."
+                },
+                "question_source": {
+                    "ru": "Источник вопроса: human, если вопрос написан человеком, или generated, если вопрос сгенерирован с помощью модели o4-mini.",
+                    "en": "Question source: human if the question is written by a human, or generated if the question is generated with the o4-mini model."
+                }
+            },
+            "image": {
+                "synt_source": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "source": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "type": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "content": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "context": {
+                    "ru": "default",
+                    "en": "default"
+                }
+            },
+            "rows": {
+                "ru": "Количество строк в таблице на изображении.",
+                "en": "The number of rows in the table on the image."
+            },
+            "columns": {
+                "ru": "Количество столбцов в таблице на изображении.",
+                "en": "The number of columns in the table on the image."
+            }
+        }
+    },
+    "task_type": "letter",
+    "task_description": "Задача на анализ изображений, содержащих табличные данные.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Таблица содержит структурированные данные, которые необходимы для выбора правильного ответа на вопрос."
+            ]
+        }
+    },
+    "exclude_fields": {},
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.9086
+    }
+}

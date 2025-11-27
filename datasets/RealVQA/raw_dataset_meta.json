@@ -1,0 +1,152 @@
+{
+    "dataset_name": "RealVQA",
+    "description": "RealVQA is a benchmark for testing the model's ability to conduct visual question-answering(VQA). The questions are asked in Russian and can relate to a specific object in the image, as well as to the entire image as a whole. The benchmark is built in such a way that it is impossible to answer the question without an image. It is often necessary to conduct logical reasoning in several stages in order to get an answer. A key feature of the dataset is the presence of distractors. Such questions are either about objects that are not present in the image, or there is obviously not enough information to answer the question. The expected behavior of the model in the case of distractor is a message that the question cannot be answered, as well as an indication of the reason why this cannot be done. This is how the model's resistance to hallucinations is tested.",
+    "license": "MERA_private",
+    "dataset_size": "len(DATA)",
+    "modalities": [
+        "image",
+        "text"
+    ],
+    "skills": [
+        "Spatial object relationship",
+        "Object-object interaction",
+        "Human-object interaction",
+        "Object localization",
+        "Object recognition",
+        "Object motion recognition",
+        "Living things motion recognition",
+        "Common everyday knowledge",
+        "Common domain knowledge",
+        "Style & genre understanding",
+        "Scene understanding",
+        "Physical property understanding",
+        "Object function understanding",
+        "Hypothetical reasoning",
+        "Cause & effect understanding",
+        "Static counting",
+        "Mathematical reasoning",
+        "Counterfactual robustness",
+        "Problem decomposition",
+        "Comparative reasoning"
+    ],
+    "domains": [],
+    "universal_domains": [],
+    "synt_source_models": [],
+    "data_example": {
+        "instruction": "Внимательно посмотрите на картинку <image>.\nОтветьте на заданный вопрос кратко. В качестве ответа на вопрос напишите слово в той же форме, как спрашивается в вопросе, без дополнительных рассуждений.\n\nВопрос:{question}\n\nОтвет:",
+        "inputs": {
+            "image": "samples/image0165.jpg",
+            "question": "Предположительно в какой день недели сделано это фото?"
+        },
+        "outputs": "в пятницу",
+        "meta": {
+            "id": 165,
+            "categories": {
+                "question_topic": [
+                    "text_understanding"
+                ],
+                "domain": [
+                    "tecnology"
+                ],
+                "class": "main"
+            },
+            "image": {
+                "source": [
+                    "photo"
+                ],
+                "type": [
+                    "photo",
+                    "text",
+                    "inventory_code"
+                ],
+                "content": [
+                    "object"
+                ],
+                "context": [
+                    "no_context"
+                ]
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "image": {
+                "ru": "default",
+                "en": "default"
+            },
+            "question": {
+                "ru": "default",
+                "en": "default"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "question_topic": {
+                    "ru": "основные темы вопроса (например, text_understanding, logic и т.д.)",
+                    "en": "the main topics of the question (e.g., text_understanding, logic, etc.)"
+                },
+                "domain": {
+                    "ru": "домены изображения (например, plant, music, sport, interior и т.д.)",
+                    "en": "the domain of the image (e.g., plant, music, sport, interior, etc.)"
+                },
+                "class": {
+                    "ru": "класс вопроса (main или distractor)",
+                    "en": "the class of the question (main or distractor)"
+                }
+            },
+            "image": {
+                "source": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "type": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "content": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "context": {
+                    "ru": "default",
+                    "en": "default"
+                }
+            }
+        }
+    },
+    "task_type": "short",
+    "task_description": "Задача на понимание содержания изображения, а также отношений между объектами на изображении.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Вопрос прямо связан с содержанием изображения и требует не только распознавания отдельных элементов, но и понимания взаимосвязей и отношений между элементами (объектами) изображения. Если информации для ответа на вопрос недостаточно, например на изображении отсутствует предмет о котором задается вопрос, то необходимо честно ответить, что на вопрос ответить нельзя и указать причину."
+            ]
+        }
+    },
+    "exclude_fields": {
+        "meta": {
+            "categories": ["class"]
+        }
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.5834
+    }
+}

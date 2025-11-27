@@ -1,0 +1,164 @@
+{
+    "dataset_name": "SchoolScienceVQA",
+    "license": "MERA_private",
+    "dataset_size": 4227,
+    "description": "The dataset is a Russian analog of the ScienceQA dataset designed to evaluate the reasoning abilities of AI models in a multi-modal and complex problem-solving environment.",
+    "modalities": [
+        "text",
+        "image"
+    ],
+    "skills": [
+        "Expert domain knowledge",
+        "Scheme recognition",
+        "Text recognition (OCR)",
+        "Static counting",
+        "Problem decomposition",
+        "Comparative reasoning",
+        "Physical property understanding",
+        "Mathematical reasoning"
+    ],
+    "domains": [
+        "biology",
+        "chemistry",
+        "earth_science",
+        "economics",
+        "history_all",
+        "history_ru",
+        "physics"
+    ],
+    "universal_domains": [],
+    "synt_source_models": [
+        "Kandinsky",
+        "ChatGPTOpenAI",
+        "Midjourney",
+        "StableDiffusion2.1"
+    ],
+    "data_example": {
+        "instruction": "Дано: вопрос с четырьмя вариантами ответа, изображение и, возможно, пояснение к нему. По имеющейся информации ответь на вопрос. В качестве ответа напиши букву правильного ответа без дополнительных пояснений (A, B, C или D).\nИзображение: <image>.\nПояснение: {context}\nВопрос: {question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nОтвет: ",
+        "inputs": {
+            "image": "samples/image0760.jpg",
+            "context": "",
+            "question": "На каком из перечисленных геологических образований вероятность сохранения изображенного на фото покрова на вершинах в течение всего года самая низкая?",
+            "option_a": "Аконкагуа, Аргентина",
+            "option_b": "Монблан, Франция",
+            "option_c": "Килиманджаро, Танзания",
+            "option_d": "Денали, США"
+        },
+        "outputs": "C",
+        "meta": {
+            "id": 760,
+            "image": {
+                "type": [
+                    "visual"
+                ],
+                "source": [
+                    "photo"
+                ]
+            },
+            "hint": "Важным моментом является географическое расположение и высота над уровнем моря.",
+            "explanation": "Гора Килиманджаро находится на экваторе в Африке. Она подвержена влиянию изменения климата. Несмотря на большую высоту (5895 метров), ледники Килиманджаро стремительно тают из-за повышения температуры и уменьшения количества осадков. В результате этого снега на вершине становится все меньше, и, по прогнозам ученых, он может полностью исчезнуть в ближайшие десятилетия. Остальные вершины находятся в более холодных климатических зонах и на более высоких широтах, что способствует сохранению снега и льда в течение всего года. Например, Монблан в Альпах и Денали на Аляске имеют постоянные ледники, а Аконкагуа, несмотря на свое расположение в южной части, имеет достаточную высоту (6962 метра), чтобы снег сохранялся круглый год.",
+            "categories": {
+                "domain": "earth_science",
+                "question_difficulty": 3
+            }
+        }
+    },
+    "data_field_descriptions": {
+        "instruction": {
+            "ru": "default",
+            "en": "default"
+        },
+        "inputs": {
+            "image": {
+                "ru": "default",
+                "en": "default"
+            },
+            "context": {
+                "ru": "Дополнительная информация, которая вместе с картинкой используется для ответа на вопрос.",
+                "en": "A supportive context used along with the image to solve the task."
+            },
+            "question": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_a": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_b": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_c": {
+                "ru": "default",
+                "en": "default"
+            },
+            "option_d": {
+                "ru": "default",
+                "en": "default"
+            }
+        },
+        "outputs": {
+            "ru": "default",
+            "en": "default"
+        },
+        "meta": {
+            "id": {
+                "ru": "default",
+                "en": "default"
+            },
+            "categories": {
+                "domain": {
+                    "ru": "Научный домен, к которому относится тестовый пример.",
+                    "en": "Scientific domain of the sample."
+                },
+                "question_difficulty": {
+                    "ru": "Сложность вопроса по шкале от 1 до 3.",
+                    "en": "Question difficulty."
+                }
+            },
+            "hint": {
+                "ru": "Наводящая подсказка для решения задачи.",
+                "en": "An additional information which gives a hint of how to solve a task without giving the exact solution."
+            },
+            "explanation": {
+                "ru": "Решение задачи.",
+                "en": "Task solution."
+            },
+            "image": {
+                "type": {
+                    "ru": "default",
+                    "en": "default"
+                },
+                "source": {
+                    "ru": "default",
+                    "en": "default"
+                }
+            }
+        }
+    },
+    "task_type": "letter",
+    "task_description": "Задача на знания в сфере естественных (физика, биология, химия, естествознание) и гуманитарных (экономика, история) наук уровня школьной программы.",
+    "prompts": {
+        "task_context": {
+            "default": [
+                "Изображдение содержит информацию, которая непосредственно связана с задаваемым вопросом и необходима для выбора правильного ответа на него.{{ rusciqa_context_form(sample) }}"
+            ]
+        }
+    },
+    "exclude_fields": {
+        "meta": ["hint", "explanation"]
+    },
+    "metrics": {
+        "Exact match": {
+            "ru": "default",
+            "en": "default"
+        }
+    },
+    "human_benchmark": {
+        "Exact match": 0.4804
+    },
+    "human_benchmark_expert": {
+        "Exact match": 0.8222
+    }
+}
