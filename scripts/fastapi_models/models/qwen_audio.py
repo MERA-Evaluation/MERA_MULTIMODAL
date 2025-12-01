@@ -7,7 +7,7 @@ from utils.base64_to_file import save_base64_to_file
 
 
 class QwenAudioChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         parts = []
         audio_files = []
         for m in messages:

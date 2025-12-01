@@ -6,7 +6,7 @@ from utils.base64_to_file import save_base64_to_file
 
 
 class SmolVLM2VideoChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         msgs = []
         tmp_files = []
 
