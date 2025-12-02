@@ -1,4 +1,5 @@
 from collections import defaultdict
+import os
 
 try:
     from models.qwen_audio import QwenAudioChatModel
@@ -72,6 +73,16 @@ try:
 except:
     LlavaNext = None
 
+try:
+    from models.custom_model import CustomModel
+except:
+    CustomModel = None
+
+try:
+    from models.custom_vision_model import CustomVisionModel
+except:
+    CustomVisionModel = None
+
 from models.openai_api_model import APIModel
 
 MODELS_REGISTRY = defaultdict(
@@ -144,5 +155,10 @@ MODELS_REGISTRY = defaultdict(
 
         "llava-hf/LLaVA-NeXT-Video-7B-hf": LlavaNext,
         "llava-hf/LLaVA-NeXT-Video-34B-hf": LlavaNext,
+
+        "CustomAudioModel": CustomModel,
+        "CustomModel": CustomModel,
+        os.getenv("CUSTOM_VISION_MODEL_NAME"): CustomVisionModel,
+        os.getenv("CUSTOM_VISION_MODEL_SMALL_NAME"): CustomVisionModel,
     }
 )
