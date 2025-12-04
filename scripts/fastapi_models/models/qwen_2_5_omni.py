@@ -7,7 +7,7 @@ from utils.base64_to_file import save_base64_to_file
 
 
 class Qwen2_5_Omni_MonoModalChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         conversation, tmp_files = [], []
 
         for m in messages:

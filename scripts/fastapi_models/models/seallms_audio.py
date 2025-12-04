@@ -9,7 +9,7 @@ from utils.base64_to_file import save_base64_to_file
 
 
 class SeaLLMsAudioChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         audio_files = []
         audios = []
         sr = self.processor.feature_extractor.sampling_rate

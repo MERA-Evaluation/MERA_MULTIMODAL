@@ -8,7 +8,7 @@ from utils.base64_to_file import save_base64_to_file
 
 
 class Qwen3_Omni_MonoModalChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         conversation, tmp_files = [], []
 
         for m in messages:
@@ -41,12 +41,16 @@ class Qwen3_Omni_MonoModalChatModel(BaseModel):
                            return_tensors="pt", padding=True, use_audio_in_video=use_audio_in_video)
         inputs = inputs.to(self.device)
 
-        with torch.amp.autocast("cuda"):
-            text_ids, _ = self.model.generate(**inputs, use_audio_in_video=use_audio_in_video, max_new_tokens=self.max_new_tokens)
+        with torch.no_grad():
+            with torch.amp.autocast("cuda"):
+                text_ids, _ = self.model.generate(**inputs, use_audio_in_video=use_audio_in_video, max_new_tokens=self.max_new_tokens)
 
         gen_ids = text_ids[:, inputs["input_ids"].shape[1] :]
 
         text = self.processor.batch_decode(gen_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+
+        del inputs, audios, images, videos, text_ids, gen_ids
+        torch.cuda.empty_cache()
 
         for p in tmp_files:
             try:

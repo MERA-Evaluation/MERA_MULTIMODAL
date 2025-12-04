@@ -7,7 +7,7 @@ from utils.base64_to_file import save_base64_to_file
 
 
 class UltravoxChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         audio_paths = []
         audio_arrays = []
 

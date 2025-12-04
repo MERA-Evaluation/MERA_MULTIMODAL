@@ -4,7 +4,7 @@ from models.base_model import BaseModel
 
 
 class AudioFlamingo3_MonoModalChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         conversation, tmp_files = [], []
 
         for m in messages:

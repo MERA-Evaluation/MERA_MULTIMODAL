@@ -9,7 +9,7 @@ from utils.base64_to_file import save_base64_to_file
 
 
 class Sa2VAVideoChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         tmp_paths = []
         frames_dir = None
 

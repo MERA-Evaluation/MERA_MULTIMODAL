@@ -6,7 +6,7 @@ from qwen_vl_utils import process_vision_info
 
 
 class Qwen2_VL_VideoChatModel(BaseModel):
-    def generate(self, messages):
+    def _generate(self, messages):
         msgs = []
         tmp_files = []
 
