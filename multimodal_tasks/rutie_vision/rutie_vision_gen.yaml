@@ -1,8 +1,36 @@
-include: [../custom_generate_task.yaml, rutie_vision.yaml]
 tag:
   - mera_vision_gen
   - mera_all
 task: rutie_vision_gen
 dataset_path: MERA-evaluation/ruTiE-Image
+output_type: generate_until
+context_based: true
+training_split: shots
+test_split: test
+fewshot_split: test
+fewshot_delimiter: "\n\n"
+request_updater: !function utils._update_request
+storage_updater: !function utils._update_storage
+fewshot_config:
+  sampler: !function ../custom_context_formers.ruTiEContextFormer  # processes no instruction doc and changes doc_to_text
+  doc_to_text_without_instruction: "{{'Картинка: <image>\n{question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nОтвет: RUTIE_TARGET_{idx}'.format(idx=meta['question_id'], **inputs).lstrip()}}"
+  doc_to_text_without_target: "{{'Картинка: <image>\n{question}\nA. {option_a}\nB. {option_b}\nC. {option_c}\nD. {option_d}\nОтвет:'.format(**inputs).lstrip()}}"
 doc_to_text: "{{instruction.replace('{', '{{').replace('}', '}}').replace('{{question}}', '{question}').replace('{{option_a}}', '{option_a}').replace('{{option_b}}', '{option_b}').replace('{{option_c}}', '{option_c}').replace('{{option_d}}', '{option_d}').format(**inputs).strip()}}"
 doc_to_target: "{{'RUTIE_TARGET_{idx}'.format(idx=meta['question_id'])}}"
+process_docs: !function utils.process_docs
+doc_to_image: !function utils.doc_to_image
+target_delimiter: " "
+num_fewshot: 1
+
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_punctuation: false
+filter_list:
+  - name: "scoring"
+    filter:
+      - function: "remove_whitespace"  # truncate leading whitespace
+      - function: "take_first"
+metadata:
+  version: 1.0
