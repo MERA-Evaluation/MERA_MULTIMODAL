@@ -1,4 +1,16 @@
-import av
+import logging
+
+eval_logger = logging.getLogger(__name__)
+
+try:
+    import av
+except ImportError:
+    av = None
+    eval_logger.warning(
+        "av (PyAV) is not installed. It is required only for video evaluation. "
+        "If you are not running video tasks, you can ignore this. "
+        "If you are running video evaluation, install via: pip install av"
+    )
 import torch
 import numpy as np
 import os

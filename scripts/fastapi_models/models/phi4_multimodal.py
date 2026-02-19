@@ -1,5 +1,17 @@
 import os
-import soundfile as sf
+import logging
+
+eval_logger = logging.getLogger(__name__)
+
+try:
+    import soundfile as sf
+except ImportError:
+    sf = None
+    eval_logger.warning(
+        "soundfile is not installed. If you are not running audio evaluation, you can ignore this. "
+        "If you are running audio tasks, install via: pip install librosa soundfile"
+    )
+
 from PIL import Image
 
 from transformers import AutoModelForCausalLM, AutoProcessor, GenerationConfig

@@ -1,6 +1,17 @@
 import os
-import librosa
+import logging
 import transformers
+
+eval_logger = logging.getLogger(__name__)
+
+try:
+    import librosa
+except ImportError:
+    librosa = None
+    eval_logger.warning(
+        "librosa is not installed. If you are not running audio evaluation, you can ignore this. "
+        "If you are running audio tasks, install via: pip install librosa soundfile"
+    )
 
 from models.base_model import BaseModel
 from utils.base64_to_file import save_base64_to_file

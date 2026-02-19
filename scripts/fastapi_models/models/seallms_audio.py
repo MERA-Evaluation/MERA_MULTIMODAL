@@ -1,5 +1,17 @@
 import os
-import librosa
+import logging
+
+eval_logger = logging.getLogger(__name__)
+
+try:
+    import librosa
+except ImportError:
+    librosa = None
+    eval_logger.warning(
+        "librosa is not installed. If you are not running audio evaluation, you can ignore this. "
+        "If you are running audio tasks, install via: pip install librosa soundfile"
+    )
+
 import torch
 
 from transformers import AutoProcessor, Qwen2AudioForConditionalGeneration
