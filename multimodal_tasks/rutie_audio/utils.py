@@ -15,6 +15,14 @@ if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 from load_media import get_audio
 
+
+from custom_metrics import process_results_template
+
+
+def process_results(doc, results):
+    return process_results_template(doc, results, func=doc_to_text)
+
+
 FALLBACK = "-1"
 RUTIE_END_QUESTION_ID = 499
 TEMPLATE = "RUTIE_TARGET_{idx}"

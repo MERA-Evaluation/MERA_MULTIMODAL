@@ -8,6 +8,11 @@ parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 from load_media import get_image
+from custom_metrics import process_results_template
+
+
+def process_results(doc, results):
+    return process_results_template(doc, results, func=doc_to_text)
 
 
 def _doc_to_text(doc: Dict[str, Any]) -> str:

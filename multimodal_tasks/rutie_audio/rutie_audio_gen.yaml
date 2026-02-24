@@ -21,11 +21,16 @@ doc_to_target: "{{'RUTIE_TARGET_{idx}'.format(idx=meta['question_id'])}}"
 doc_to_audio: !function utils.doc_to_audio
 num_fewshot: 1
 
+process_results: !function utils.process_results
+
 metric_list:
   - metric: exact_match
     aggregation: mean
     higher_is_better: true
-    ignore_punctuation: false
+  - metric: judge_score
+    aggregation: mean
+    higher_is_better: true
+
 filter_list:
   - name: "scoring"
     filter:
