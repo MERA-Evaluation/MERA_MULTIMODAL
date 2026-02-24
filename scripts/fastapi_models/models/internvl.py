@@ -1,15 +1,27 @@
 import os
+import logging
 import math
 import numpy as np
 import torch
 import torchvision.transforms as T
 from PIL import Image
-from decord import VideoReader, cpu
 from torchvision.transforms.functional import InterpolationMode
 
 from models.base_model import BaseModel
 from utils.base64_to_file import save_base64_to_file
 
+eval_logger = logging.getLogger(__name__)
+
+try:
+    from decord import VideoReader, cpu
+except ImportError:
+    VideoReader = None
+    cpu = None
+    eval_logger.warning(
+        "decord is not installed. It is required only for video evaluation. "
+        "If you are not running video tasks, you can ignore this. "
+        "If you are running video evaluation, install via: pip install decord"
+    )
 
 class InternVL35VideoChatModel(BaseModel):
     def _generate(self, messages):

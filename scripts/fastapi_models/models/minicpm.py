@@ -1,4 +1,7 @@
 import os
+import logging
+
+eval_logger = logging.getLogger(__name__)
 
 from models.base_model import BaseModel
 from utils.base64_to_file import save_base64_to_file
@@ -8,9 +11,25 @@ import numpy as np
 from PIL import Image
 from moviepy import VideoFileClip
 import tempfile
-import librosa
-import soundfile as sf
 import torch
+
+try:
+    import librosa
+except ImportError:
+    librosa = None
+    eval_logger.warning(
+        "librosa is not installed. If you are not running audio evaluation, you can ignore this. "
+        "If you are running audio tasks, install via: pip install librosa soundfile"
+    )
+
+try:
+    import soundfile as sf
+except ImportError:
+    sf = None
+    eval_logger.warning(
+        "soundfile is not installed. If you are not running audio evaluation, you can ignore this. "
+        "If you are running audio tasks, install via: pip install librosa soundfile"
+    )
 
 
 class MiniCPM(BaseModel):
